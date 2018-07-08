@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MVC_Homework1.Models.客戶聯絡人>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>客戶聯絡人</h2>
+
+@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get))
+{ 
+    @Html.TextBox("keyword", null)
+    <input type="submit"/>
+}
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.職稱)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.姓名)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.手機)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.電話)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.職稱)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.姓名)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.手機)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.電話)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.客戶資料.客戶名稱)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<ul class="pagination">
+    <li class="@(ViewBag.Current == 1 ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current <= 1 ? 1 : ViewBag.Current - 1, keyword = this.ViewContext.ViewData.ModelState["keyword"].Value.AttemptedValue})">&laquo;</a></li>
+    @for (int i = 1; i <= ViewBag.Count; i++)
+    {
+        <li class="@(ViewBag.Current == i ? "active" : "")"><a href="@Url.Action("Index", new {page = i, keyword = this.ViewContext.ViewData.ModelState["keyword"].Value.AttemptedValue})">@i</a></li>
+    }
+    <li class="@(ViewBag.Current == ViewBag.Count ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current >= ViewBag.Count ? ViewBag.Count : ViewBag.Current + 1, keyword = this.ViewContext.ViewData.ModelState["keyword"].Value.AttemptedValue})">&raquo;</a></li>
+</ul>

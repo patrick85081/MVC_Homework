@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace MVC_Homework1.Models
 {
     using System;
@@ -12,6 +14,7 @@ namespace MVC_Homework1.Models
     public partial class 客戶資料MetaData
     {
         [Required]
+        [ReadOnly(true)]
         public int Id { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
@@ -32,6 +35,7 @@ namespace MVC_Homework1.Models
         [StringLength(100, ErrorMessage="欄位長度不得大於 100 個字元")]
         public string 地址 { get; set; }
         
+        [EmailAddress]
         [StringLength(250, ErrorMessage="欄位長度不得大於 250 個字元")]
         public string Email { get; set; }
     
