@@ -1,8 +1,8 @@
 ﻿# MVC Homework 1
 
 ## 作業要求
-* [ ] [資料庫下載連結](https://drive.google.com/open?id=0B9TSNtgzYzPTSGR5TEc4TjcwZmM) or [資料庫SQL下載連結](https://drive.google.com/open?id=1AX0x00BUM3N47mY8fLoaL47QPI_ERbKl)
-* [ ] 請使用 "客戶資料" 這個資料庫做開發 (如附件檔案)
+* [x] [資料庫下載連結](https://drive.google.com/open?id=0B9TSNtgzYzPTSGR5TEc4TjcwZmM) or [資料庫SQL下載連結](https://drive.google.com/open?id=1AX0x00BUM3N47mY8fLoaL47QPI_ERbKl)
+* [x] 請使用 "客戶資料" 這個資料庫做開發 (如附件檔案)
 * [ ] 請實作出「客戶資料管理」、「客戶聯絡人管理」與「客戶銀行帳戶管理」等簡易 CRUD 功能 (盡量做各種功能出來)
 * [ ] 在列表頁要實作「搜尋」功能
 * [ ] 實作一個清單頁面，顯示欄位有「客戶名稱、聯絡人數量、銀行帳戶數量」共三個欄位，此功能要在資料庫中建立一個檢視表，並且匯入 EDMX。
