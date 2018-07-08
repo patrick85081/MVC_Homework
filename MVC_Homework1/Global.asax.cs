@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MVC_Homework1.Models;
 
 namespace MVC_Homework1
 {
@@ -16,6 +17,9 @@ namespace MVC_Homework1
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //DatabaseInit.RemoveAll();
+            DatabaseInit.Init();
         }
     }
 }
