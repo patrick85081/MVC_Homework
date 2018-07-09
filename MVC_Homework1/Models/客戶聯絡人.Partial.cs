@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Linq;
 using MVC_Homework1.Models.Validations;
 using MVC_Homework1.ViewModels;
 
@@ -9,8 +10,27 @@ namespace MVC_Homework1.Models
     using System.ComponentModel.DataAnnotations;
     
     [MetadataType(typeof(客戶聯絡人MetaData))]
-    public partial class 客戶聯絡人
+    public partial class 客戶聯絡人 : IValidatableObject
     {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            I客戶資料Repository customeRepository = RepositoryHelper.Get客戶資料Repository();
+
+            var customer = customeRepository.Find(this.客戶Id);
+            if (customer != null)
+            {
+                var isRepeat = customer.Email == this.Email ||
+                               (from concat in customer.客戶聯絡人
+                                   where concat.Id != this.Id
+                                   select concat.Email)
+                               .Any(mail => mail == this.Email);
+
+                if (isRepeat)
+                    yield return new ValidationResult("Email 已經重複", new[] {nameof(Email)});
+            }
+
+            customeRepository.UnitOfWork.Context.Dispose();
+        }
     }
     
     public partial class 客戶聯絡人MetaData
