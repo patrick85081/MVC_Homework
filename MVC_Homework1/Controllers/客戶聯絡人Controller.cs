@@ -38,6 +38,11 @@ namespace MVC_Homework1.Controllers
             return View(客戶聯絡人.ToList());
         }
 
+        public ActionResult ExcelExport()
+        {
+            return this.ExcelFile(concatRepository.All().ToArray());
+        }
+
         // GET: 客戶聯絡人/Details/5
         public ActionResult Details(int? id)
         {

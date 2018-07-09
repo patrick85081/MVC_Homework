@@ -6,11 +6,12 @@
 }
 
 <h2>客戶聯絡人</h2>
+<a href="@Url.Action("ExcelExport")">匯出報表</a>
 
 @using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get))
-{ 
+{
     @Html.TextBox("keyword", null)
-    <input type="submit"/>
+    <input type="submit" class="btn btn-primary" />
 }
 <hr />
 <p>
@@ -39,7 +40,8 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.職稱)
@@ -60,9 +62,9 @@
                 @Html.DisplayFor(modelItem => item.客戶資料.客戶名稱)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

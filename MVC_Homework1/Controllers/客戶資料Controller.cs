@@ -34,6 +34,11 @@ namespace MVC_Homework1.Controllers
             return View(客戶資料.ToList());
         }
 
+        public ActionResult ExcelExport()
+        {
+            return this.ExcelFile(customeRepository.All().ToArray());
+        }
+
         // GET: 客戶資料/Details/5
         public ActionResult Details(int? id)
         {

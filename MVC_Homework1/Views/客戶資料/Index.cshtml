@@ -6,11 +6,12 @@
 }
 
 <h2>客戶資料</h2>
+<a href="@Url.Action("ExcelExport")">匯出報表</a>
 
 @using (Html.BeginForm("Index", "客戶資料", FormMethod.Get))
 {
     @Html.TextBox("keyword", null)
-    <input type="submit" />
+    <input type="submit" class="btn btn-primary" />
 }
 <hr />
 <p>

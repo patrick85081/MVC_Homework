@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using MVC_Homework1.ViewModels;
 
 namespace MVC_Homework1.Models
 {
@@ -39,7 +40,10 @@ namespace MVC_Homework1.Models
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
         public string 電話 { get; set; }
-    
+
+        [ExcelIgnore]
+        public bool 已刪除 { get; set; }
+
         public virtual 客戶資料 客戶資料 { get; set; }
     }
 }
