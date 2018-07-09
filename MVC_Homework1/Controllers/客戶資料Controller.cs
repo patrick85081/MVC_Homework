@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -21,27 +22,25 @@ namespace MVC_Homework1.Controllers
         }
 
         // GET: 客戶資料
-        public ActionResult Index(QueryOption query, string keyword, string category)
+        public ActionResult Index(客戶資料QueryOption query)
         {
-            ViewBag.category = customerRepository.Get客戶分類()
+            ViewBag.CategoryList = customerRepository.Get客戶分類()
                 .ToArray()
                 .Select(c => new SelectListItem()
                 {
-                    Selected = c == category,
+                    Selected = c == query.Category,
                     Text = string.IsNullOrEmpty(c) ? "全部" : c,
                     Value = c,
                 });
 
-            var source = customerRepository.Search(keyword, category);
+            var source = customerRepository.Search(query.Keyword, query.Category);
 
-            var 客戶資料 = source.OrderBy(customer => customer.Id)
-                .GetPage(query);
+            var 客戶資料 = source
+                .OrderBy(query.GetSortString())
+                .GetCurrentPage(query);
 
-
-            //ViewBag.客戶Id = new SelectList(customerRepository.All(), "Id", "客戶名稱", 客戶資料.);
-
-            ViewBag.Current = query.Page;
-            ViewBag.Count = source.GetPageCount();
+            query.SetPageCount(source.GetPageCount(query));
+            ViewBag.QueryOption = query;
 
             return View(客戶資料.ToList());
         }

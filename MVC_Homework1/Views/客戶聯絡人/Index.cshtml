@@ -1,22 +1,26 @@
-﻿@model IEnumerable<MVC_Homework1.Models.客戶聯絡人>
+﻿@using MVC_Homework1.ViewModels
+@model IEnumerable<MVC_Homework1.Models.客戶聯絡人>
 
 @{
     ViewBag.Title = "客戶聯絡人";
-    var keyword = this.ViewContext.ViewData.ModelState["keyword"]?.Value?.AttemptedValue ?? "";
-    var job = this.ViewContext.ViewData.ModelState["job"]?.Value?.AttemptedValue ?? "";
+    客戶聯絡人QueryOption queryOption = this.ViewBag.QueryOption;
+    var keyword = queryOption.Keyword;
+    var job = queryOption.Job;
+    int current = queryOption.Page;
+    int count = queryOption.GetPageCount();
 }
 
 <h2>客戶聯絡人</h2>
 <a href="@Url.Action("ExcelExport")">匯出報表</a>
 <hr />
 
-@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get, new {@class= "form-group form-group-sm" }))
+@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get, new { @class = "form-group form-group-sm" }))
 {
     @Html.Label("姓名")
     @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "請輸入聯絡人姓名" })
     @Html.Label("職稱")
     @Html.TextBox("job", null, new { @class = "form-control", placeholder = "請輸入職稱" })
-    <br/>
+    <br />
     <input type="submit" class="btn btn-primary" title="搜尋" value="搜尋" />
 }
 <hr />
@@ -26,22 +30,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.職稱)
+            @Html.BuildSortLink(model => model.職稱, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.姓名)
+            @Html.BuildSortLink(model => model.姓名, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.BuildSortLink(model => model.Email, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.手機)
+            @Html.BuildSortLink(model => model.手機, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.電話)
+            @Html.BuildSortLink(model => model.電話, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            @Html.BuildSortLink(model => model.客戶資料.客戶名稱, "Index", queryOption)
         </th>
         <th></th>
     </tr>
@@ -77,11 +81,4 @@
 
 </table>
 
-<ul class="pagination">
-    <li class="@(ViewBag.Current == 1 ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current <= 1 ? 1 : ViewBag.Current - 1, keyword = keyword, job = job})">&laquo;</a></li>
-    @for (int i = 1; i <= ViewBag.Count; i++)
-    {
-        <li class="@(ViewBag.Current == i ? "active" : "")"><a href="@Url.Action("Index", new {page = i, keyword = keyword, job = job})">@i</a></li>
-    }
-    <li class="@(ViewBag.Current == ViewBag.Count ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current >= ViewBag.Count ? ViewBag.Count : ViewBag.Current + 1, keyword = keyword, job = job})">&raquo;</a></li>
-</ul>
+@Html.BuildPager("Index", queryOption)

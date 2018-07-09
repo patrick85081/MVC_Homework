@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -24,16 +25,16 @@ namespace MVC_Homework1.Controllers
         }
 
         // GET: 客戶聯絡人
-        public ActionResult Index(QueryOption query, string keyword, string job)
+        public ActionResult Index(客戶聯絡人QueryOption query)
         {
-            var source = concatRepository.Search(keyword, job);
+            var source = concatRepository.Search(query.Keyword, query.Job);
 
             var 客戶聯絡人 = source
-                .OrderBy(customer => customer.Id)
-                .GetPage(query);
+                .OrderBy(query.GetSortString())
+                .GetCurrentPage(query);
 
-            ViewBag.Current = query.Page;
-            ViewBag.Count = source.GetPageCount();
+            query.SetPageCount(source.GetPageCount(query));
+            ViewBag.QueryOption = query;
 
             return View(客戶聯絡人.ToList());
         }

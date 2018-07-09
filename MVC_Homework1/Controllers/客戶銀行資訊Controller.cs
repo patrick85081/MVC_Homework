@@ -25,14 +25,14 @@ namespace MVC_Homework1.Controllers
         }
 
         // GET: 客戶銀行資訊
-        public ActionResult Index(QueryOption query, string keyword)
+        public ActionResult Index(QueryOption query)
         {
-            var source = blankRepository.Search(keyword);
+            var source = blankRepository.Search(query.Keyword);
             var 客戶銀行資訊 = source.OrderBy(blank => blank.Id)
-                .GetPage(query);
+                .GetCurrentPage(query);
 
-            ViewBag.Current = query.Page;
-            ViewBag.Count = source.GetPageCount();
+            query.SetPageCount(source.GetPageCount(query));
+            ViewBag.QueryOption = query;
 
             return View(客戶銀行資訊.ToList());
         }

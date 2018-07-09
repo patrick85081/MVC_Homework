@@ -1,17 +1,22 @@
-﻿@model IEnumerable<MVC_Homework1.Models.客戶銀行資訊>
+﻿@using MVC_Homework1.ViewModels
+@model IEnumerable<MVC_Homework1.Models.客戶銀行資訊>
 
 @{
     ViewBag.Title = "客戶銀行資訊";
-    var keyword = this.ViewContext.ViewData.ModelState["keyword"]?.Value?.AttemptedValue ?? "";
+    QueryOption queryOption = this.ViewBag.QueryOption;
+    var keyword = queryOption.Keyword;
 }
 
 <h2>客戶銀行資訊</h2>
 <a href="@Url.Action("ExcelExport")">匯出報表</a>
+<hr />
 
-@using (Html.BeginForm("Index", "客戶銀行資訊", FormMethod.Get))
+@using (Html.BeginForm("Index", "客戶銀行資訊", FormMethod.Get, new { @class = "form-group form-group-sm" }))
 {
-    @Html.TextBox("keyword", null)
-    <input type="submit" class="btn btn-primary" />
+    @Html.Label("銀行名稱")
+    @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "請輸入銀行名稱" })
+    <br/>
+    <input type="submit" class="btn btn-primary" value="搜尋"/>
 }
 <hr />
 <p>
@@ -20,22 +25,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.銀行名稱)
+            @Html.BuildSortLink(model => model.銀行名稱, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.銀行代碼)
+            @Html.BuildSortLink(model => model.銀行代碼, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.分行代碼)
+            @Html.BuildSortLink(model => model.分行代碼, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.帳戶名稱)
+            @Html.BuildSortLink(model => model.帳戶名稱, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.帳戶號碼)
+            @Html.BuildSortLink(model => model.帳戶號碼, "Index", queryOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            @Html.BuildSortLink(model => model.客戶資料.客戶名稱, "Index", queryOption)
         </th>
         <th></th>
     </tr>
@@ -71,11 +76,4 @@
 
 </table>
 
-<ul class="pagination">
-    <li class="@(ViewBag.Current == 1 ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current <= 1 ? 1 : ViewBag.Current - 1, keyword = keyword})">&laquo;</a></li>
-    @for (int i = 1; i <= ViewBag.Count; i++)
-    {
-        <li class="@(ViewBag.Current == i ? "active" : "")"><a href="@Url.Action("Index", new {page = i, keyword = keyword})">@i</a></li>
-    }
-    <li class="@(ViewBag.Current == ViewBag.Count ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current >= ViewBag.Count ? ViewBag.Count : ViewBag.Current + 1, keyword = keyword})">&raquo;</a></li>
-</ul>
+@Html.BuildPager("Index", queryOption)
