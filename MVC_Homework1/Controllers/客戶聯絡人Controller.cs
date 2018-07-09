@@ -24,9 +24,9 @@ namespace MVC_Homework1.Controllers
         }
 
         // GET: 客戶聯絡人
-        public ActionResult Index(QueryOption query, string keyword)
+        public ActionResult Index(QueryOption query, string keyword, string job)
         {
-            var source = concatRepository.Search(keyword);
+            var source = concatRepository.Search(keyword, job);
 
             var 客戶聯絡人 = source
                 .OrderBy(customer => customer.Id)

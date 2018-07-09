@@ -19,7 +19,7 @@ namespace MVC_Homework1.ViewModels
 
         public static int GetPageCount<TSource>(this IQueryable<TSource> source, int pageSize = 10)
         {
-            return source.Count() / pageSize;
+            return source.Count() / pageSize + 1;
         }
     }
 }

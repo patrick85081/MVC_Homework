@@ -3,15 +3,21 @@
 @{
     ViewBag.Title = "客戶聯絡人";
     var keyword = this.ViewContext.ViewData.ModelState["keyword"]?.Value?.AttemptedValue ?? "";
+    var job = this.ViewContext.ViewData.ModelState["job"]?.Value?.AttemptedValue ?? "";
 }
 
 <h2>客戶聯絡人</h2>
 <a href="@Url.Action("ExcelExport")">匯出報表</a>
+<hr />
 
-@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get))
+@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get, new {@class= "form-group form-group-sm" }))
 {
-    @Html.TextBox("keyword", null)
-    <input type="submit" class="btn btn-primary" />
+    @Html.Label("姓名")
+    @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "請輸入聯絡人姓名" })
+    @Html.Label("職稱")
+    @Html.TextBox("job", null, new { @class = "form-control", placeholder = "請輸入職稱" })
+    <br/>
+    <input type="submit" class="btn btn-primary" title="搜尋" />
 }
 <hr />
 <p>
@@ -72,10 +78,10 @@
 </table>
 
 <ul class="pagination">
-    <li class="@(ViewBag.Current == 1 ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current <= 1 ? 1 : ViewBag.Current - 1, keyword = keyword})">&laquo;</a></li>
+    <li class="@(ViewBag.Current == 1 ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current <= 1 ? 1 : ViewBag.Current - 1, keyword = keyword, job = job})">&laquo;</a></li>
     @for (int i = 1; i <= ViewBag.Count; i++)
     {
-        <li class="@(ViewBag.Current == i ? "active" : "")"><a href="@Url.Action("Index", new {page = i, keyword = keyword})">@i</a></li>
+        <li class="@(ViewBag.Current == i ? "active" : "")"><a href="@Url.Action("Index", new {page = i, keyword = keyword, job = job})">@i</a></li>
     }
-    <li class="@(ViewBag.Current == ViewBag.Count ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current >= ViewBag.Count ? ViewBag.Count : ViewBag.Current + 1, keyword = keyword})">&raquo;</a></li>
+    <li class="@(ViewBag.Current == ViewBag.Count ? "disabled" : "")"><a href="@Url.Action("Index", new {page = ViewBag.Current >= ViewBag.Count ? ViewBag.Count : ViewBag.Current + 1, keyword = keyword, job = job})">&raquo;</a></li>
 </ul>

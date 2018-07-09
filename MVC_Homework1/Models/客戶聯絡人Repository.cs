@@ -16,6 +16,11 @@ namespace MVC_Homework1.Models
 	            this.All() : 
 	            this.All().Where(concat => concat.姓名.Contains(keyword));
 
+	    public IQueryable<客戶聯絡人> Search(string keyword, string job) =>
+	        Search(keyword)
+	            .Where(concat => string.IsNullOrEmpty(job) || concat.職稱 == job);
+	    
+
 	    public override void Delete(客戶聯絡人 entity)
 	    {
 	        entity.已刪除 = true;
@@ -26,5 +31,6 @@ namespace MVC_Homework1.Models
     {
         客戶聯絡人 Find(int? id);
         IQueryable<客戶聯絡人> Search(string keyword);
+        IQueryable<客戶聯絡人> Search(string keyword, string job);
     }
 }
