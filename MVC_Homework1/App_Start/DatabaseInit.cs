@@ -26,7 +26,7 @@ namespace MVC_Homework1
         {
             using (var context = new 客戶資料Entities())
             {
-                if (context.客戶資料.Any())
+                if (!context.客戶資料.Any())
                 {
                     var customers = Random客戶資料(50).ToArray();
                     var blanks = customers.SelectMany(c => Random銀行資訊(random.Next(1, 10), c.客戶名稱, c.Id)).ToArray();

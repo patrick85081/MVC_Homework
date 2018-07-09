@@ -226,6 +226,7 @@
     <Compile Include="Models\sysdiagramsRepository.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Validations\CellPhoneValdationAttribute.cs" />
     <Compile Include="Models\客戶信息.cs">
       <DependentUpon>客戶資料.tt</DependentUpon>
     </Compile>

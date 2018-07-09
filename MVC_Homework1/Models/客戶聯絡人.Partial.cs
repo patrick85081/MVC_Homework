@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using MVC_Homework1.Models.Validations;
 using MVC_Homework1.ViewModels;
 
 namespace MVC_Homework1.Models
@@ -15,7 +16,6 @@ namespace MVC_Homework1.Models
     public partial class 客戶聯絡人MetaData
     {
         [Required]
-        [ReadOnly(true)]
         public int Id { get; set; }
 
         [Required]
@@ -35,6 +35,7 @@ namespace MVC_Homework1.Models
         [Required]
         public string Email { get; set; }
         
+        [CellPhoneValdation]
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
         public string 手機 { get; set; }
         

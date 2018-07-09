@@ -19,7 +19,6 @@ namespace MVC_Homework1.Models
         public int Id { get; set; }
 
         [Required]
-        [ReadOnly(true)]
         public int 客戶Id { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
