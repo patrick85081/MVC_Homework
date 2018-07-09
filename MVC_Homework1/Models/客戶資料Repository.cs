@@ -6,6 +6,11 @@ namespace MVC_Homework1.Models
 {   
 	public  class 客戶資料Repository : EFRepository<客戶資料>, I客戶資料Repository
 	{
+	    public override IQueryable<客戶資料> All()
+	    {
+	        return base.All().Where(customer => !customer.已刪除);
+	    }
+
 	    public 客戶資料 Find(int? id) =>
 	        id.HasValue ?
 	            this.All().FirstOrDefault(customer => customer.Id == id.Value) :
@@ -15,6 +20,13 @@ namespace MVC_Homework1.Models
 	        string.IsNullOrEmpty(keyword) ?
 	            this.All() :
 	            this.All().Where(customer => customer.客戶名稱.Contains(keyword));
+
+	    public IQueryable<客戶資料> Search(string keyword, string category) =>
+	        Search(keyword)
+	            .Where(customer => string.IsNullOrEmpty(category) || category == customer.客戶分類);
+
+        public IQueryable<string> Get客戶分類() =>
+	        this.All().Select(customer => customer.客戶分類).Distinct();
 
 	    public override void Delete(客戶資料 entity)
 	    {
@@ -26,5 +38,7 @@ namespace MVC_Homework1.Models
 	{
 	    客戶資料 Find(int? id);
 	    IQueryable<客戶資料> Search(string keyword);
+	    IQueryable<string> Get客戶分類();
+	    IQueryable<客戶資料> Search(string keyword, string category);
 	}
 }

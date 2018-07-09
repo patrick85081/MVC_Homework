@@ -15,7 +15,6 @@ namespace MVC_Homework1.Models
     public partial class 客戶銀行資訊MetaData
     {
         [Required]
-        [ReadOnly(true)]
         public int Id { get; set; }
 
         [Required]

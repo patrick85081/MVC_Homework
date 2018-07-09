@@ -15,7 +15,6 @@ namespace MVC_Homework1.Models
     public partial class 客戶資料MetaData
     {
         [Required]
-        [ReadOnly(true)]
         public int Id { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
@@ -42,6 +41,10 @@ namespace MVC_Homework1.Models
 
         [ExcelIgnore]
         public bool 已刪除 { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "欄位長度不得大於 100 個字元")]
+        public string 客戶分類 { get; set; }
 
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }
         public virtual ICollection<客戶聯絡人> 客戶聯絡人 { get; set; }

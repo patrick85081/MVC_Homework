@@ -6,7 +6,12 @@ namespace MVC_Homework1.Models
 {   
 	public  class 客戶銀行資訊Repository : EFRepository<客戶銀行資訊>, I客戶銀行資訊Repository
 	{
-	    public 客戶銀行資訊 Find(int? id) =>
+	    public override IQueryable<客戶銀行資訊> All()
+	    {
+	        return base.All().Where(blank => !blank.已刪除 && !blank.客戶資料.已刪除);
+	    }
+
+        public 客戶銀行資訊 Find(int? id) =>
 	        id.HasValue ?
 	            this.All().FirstOrDefault(blank => blank.Id == id.Value) :
 	            null;

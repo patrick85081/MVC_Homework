@@ -6,7 +6,12 @@ namespace MVC_Homework1.Models
 {   
 	public  class 客戶聯絡人Repository : EFRepository<客戶聯絡人>, I客戶聯絡人Repository
 	{
-	    public 客戶聯絡人 Find(int? id) =>
+	    public override IQueryable<客戶聯絡人> All()
+	    {
+	        return base.All().Where(concat => !concat.已刪除 && !concat.客戶資料.已刪除);
+	    }
+
+        public 客戶聯絡人 Find(int? id) =>
 	        id.HasValue ? 
 	            this.All().FirstOrDefault(concat => concat.Id == id.Value) : 
 	            null;

@@ -13,20 +13,32 @@ namespace MVC_Homework1.Controllers
 {
     public class 客戶資料Controller : Controller
     {
-        private readonly I客戶資料Repository customeRepository;
+        private readonly I客戶資料Repository customerRepository;
 
         public 客戶資料Controller()
         {
-            customeRepository = RepositoryHelper.Get客戶資料Repository();
+            customerRepository = RepositoryHelper.Get客戶資料Repository();
         }
 
         // GET: 客戶資料
-        public ActionResult Index(QueryOption query, string keyword)
+        public ActionResult Index(QueryOption query, string keyword, string category)
         {
-            var source = customeRepository.Search(keyword);
+            ViewBag.category = customerRepository.Get客戶分類()
+                .ToArray()
+                .Select(c => new SelectListItem()
+                {
+                    Selected = c == category,
+                    Text = string.IsNullOrEmpty(c) ? "全部" : c,
+                    Value = c,
+                });
+
+            var source = customerRepository.Search(keyword, category);
 
             var 客戶資料 = source.OrderBy(customer => customer.Id)
                 .GetPage(query);
+
+
+            //ViewBag.客戶Id = new SelectList(customerRepository.All(), "Id", "客戶名稱", 客戶資料.);
 
             ViewBag.Current = query.Page;
             ViewBag.Count = source.GetPageCount();
@@ -36,7 +48,7 @@ namespace MVC_Homework1.Controllers
 
         public ActionResult ExcelExport()
         {
-            return this.ExcelFile(customeRepository.All().ToArray());
+            return this.ExcelFile(customerRepository.All().ToArray());
         }
 
         // GET: 客戶資料/Details/5
@@ -46,7 +58,7 @@ namespace MVC_Homework1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = customeRepository.Find(id);
+            客戶資料 客戶資料 = customerRepository.Find(id);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -65,12 +77,12 @@ namespace MVC_Homework1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email,客戶分類")] 客戶資料 客戶資料)
         {
             if (ModelState.IsValid)
             {
-                customeRepository.Add(客戶資料);
-                customeRepository.UnitOfWork.Commit();
+                customerRepository.Add(客戶資料);
+                customerRepository.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -84,7 +96,7 @@ namespace MVC_Homework1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = customeRepository.Find(id);
+            客戶資料 客戶資料 = customerRepository.Find(id);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -97,11 +109,11 @@ namespace MVC_Homework1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Edit([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email,客戶分類")] 客戶資料 客戶資料)
         {
             if (ModelState.IsValid)
             {
-                var db = customeRepository.UnitOfWork.Context;
+                var db = customerRepository.UnitOfWork.Context;
                 db.Entry(客戶資料).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -116,7 +128,7 @@ namespace MVC_Homework1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = customeRepository.Find(id);
+            客戶資料 客戶資料 = customerRepository.Find(id);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -129,9 +141,9 @@ namespace MVC_Homework1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            客戶資料 客戶資料 = customeRepository.Find(id);
-            customeRepository.Delete(客戶資料);
-            customeRepository.UnitOfWork.Commit();
+            客戶資料 客戶資料 = customerRepository.Find(id);
+            customerRepository.Delete(客戶資料);
+            customerRepository.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 
@@ -139,7 +151,7 @@ namespace MVC_Homework1.Controllers
         {
             if (disposing)
             {
-                customeRepository.UnitOfWork.Context.Dispose();
+                customerRepository.UnitOfWork.Context.Dispose();
             }
             base.Dispose(disposing);
         }
