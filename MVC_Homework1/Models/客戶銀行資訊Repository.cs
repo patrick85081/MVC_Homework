@@ -15,6 +15,11 @@ namespace MVC_Homework1.Models
 	        string.IsNullOrEmpty(keyword) ?
 	            this.All() :
 	            this.All().Where(blank => blank.銀行名稱.Contains(keyword));
+
+	    public override void Delete(客戶銀行資訊 entity)
+	    {
+	        entity.已刪除 = true;
+	    }
     }
 
 	public  interface I客戶銀行資訊Repository : IRepository<客戶銀行資訊>

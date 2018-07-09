@@ -15,7 +15,12 @@ namespace MVC_Homework1.Models
 	        string.IsNullOrEmpty(keyword) ?
 	            this.All() :
 	            this.All().Where(customer => customer.客戶名稱.Contains(keyword));
-    }
+
+	    public override void Delete(客戶資料 entity)
+	    {
+	        entity.已刪除 = true;
+	    }
+	}
 
 	public  interface I客戶資料Repository : IRepository<客戶資料>
 	{

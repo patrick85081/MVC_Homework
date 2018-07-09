@@ -16,8 +16,11 @@ namespace MVC_Homework1.Models
 	            this.All() : 
 	            this.All().Where(concat => concat.姓名.Contains(keyword));
 
-
-	}
+	    public override void Delete(客戶聯絡人 entity)
+	    {
+	        entity.已刪除 = true;
+	    }
+    }
 
     public interface I客戶聯絡人Repository : IRepository<客戶聯絡人>
     {
