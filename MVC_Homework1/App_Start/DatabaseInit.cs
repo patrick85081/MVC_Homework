@@ -26,7 +26,7 @@ namespace MVC_Homework1
         {
             using (var context = new 客戶資料Entities())
             {
-                if (context.客戶資料.Count() == 0)
+                if (context.客戶資料.Any())
                 {
                     var customers = Random客戶資料(50).ToArray();
                     var blanks = customers.SelectMany(c => Random銀行資訊(random.Next(1, 10), c.客戶名稱, c.Id)).ToArray();
@@ -80,7 +80,7 @@ namespace MVC_Homework1
                         客戶Id = 公司Id,
                         姓名 = name,
                         Email = $"{name}@{公司名稱}.com",
-                        手機 = $"09{RandomNumber(8)}",
+                        手機 = $"09{RandomNumber(2)}-{RandomNumber(6)}",
                         職稱 = Random職稱(),
                         電話 = $"02-{RandomNumber(9)}"
                     });
@@ -96,8 +96,8 @@ namespace MVC_Homework1
 
         private static string Random姓名()
         {
-            string[] lastNames = new[] { "王", "林", "簡", "吳", "施", "彭", "劉", "陳", "習" };
-            string[] firstNames = new[] { "正恩", "中正", "德華", "紹涵", "英文", "英九", "金平" };
+            string[] lastNames = new[] { "王", "林", "簡", "吳", "施", "彭", "劉", "陳", "習", "歐" };
+            string[] firstNames = new[] { "正恩", "招弟", "中正", "德華", "紹涵", "英文", "英九", "金平", "巴馬" };
 
             int lastNameIndex = random.Next(0, lastNames.Length - 1);
             int firstNameIndex = random.Next(0, firstNames.Length - 1);

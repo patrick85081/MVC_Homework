@@ -19,6 +19,7 @@ namespace MVC_Homework1.Models
 
 	public  interface I客戶資料Repository : IRepository<客戶資料>
 	{
-
+	    客戶資料 Find(int? id);
+	    IQueryable<客戶資料> Search(string keyword);
 	}
 }
