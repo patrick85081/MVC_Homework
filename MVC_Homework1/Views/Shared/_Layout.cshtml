@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/knockout")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,6 +28,7 @@
                     <li>@Html.ActionLink("客戶資料", "Index", "客戶資料")</li>
                     <li>@Html.ActionLink("客戶連絡人", "Index", "客戶聯絡人")</li>
                     <li>@Html.ActionLink("客戶銀行資訊", "Index", "客戶銀行資訊")</li>
+                    <li>@Html.ActionLink("AJAX客戶信息", "Index", "客戶信息")</li>
                 </ul>
             </div>
         </div>

@@ -63,6 +63,26 @@ namespace MVC_Homework1.ViewModels
         public string Job { get; set; }
     }
 
+    /// <summary>
+    /// JS API 回傳用
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class QueryOptionResult<T> : QueryOption
+    {
+        public QueryOptionResult(QueryOption query, T datas)
+        {
+            this.Keyword = query.Keyword;
+            this.Page = query.Page;
+            this.SortField = query.SortField;
+            this.SortOrder = query.SortOrder;
+            this.SetPageCount(query.GetPageCount());
+            this.Datas = datas;
+        }
+
+        public T Datas { get; set; }
+        public int PageCount => GetPageCount();
+    }
+
     public enum SortOrder
     {
         ASC,

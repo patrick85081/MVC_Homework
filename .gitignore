@@ -260,5 +260,7 @@ paket-files/
 __pycache__/
 *.pyc
 
-App_Data/*.xlsx
-App_Data/*.xls
+*/App_Data/*.xlsx
+*/App_Data/*.xls
+*/Scripts/viewModels/*.js
+*/Scripts/viewModels/*.js.map

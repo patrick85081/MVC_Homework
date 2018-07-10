@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index", "客戶資料", FormMethod.Get, new { @class = "form-group form-group-sm" }))
+{
+    @Html.Label("客戶名稱")
+    @Html.TextBox("Keyword", null, new { @class = "form-control", placeholder = "請輸入客戶名稱" })
+    <br />
+    <input type="submit" class="btn btn-primary" title="搜尋" value="搜尋" />
+}
+<hr />
+
+<div id="root"
+     >
+    
+    <table class="table">
+        <tr>
+            <th>客戶名稱</th>
+            <th>銀行數量</th>
+            <th>聯絡人數量</th>
+        </tr>
+        <!-- ko foreach: customers-->
+        <tr>
+            <td data-bind="text: 客戶名稱"></td>
+            <td data-bind="text: 銀行數量"></td>
+            <td data-bind="text: 聯絡人數量"></td>
+        </tr>
+        <!-- /ko-->
+    </table>
+    
+    <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li class="disabled"><a href="#">&raquo;</a></li>
+    </ul>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var viewModel = new CustomerInfomationViewModel("@Url.Action("Data")");
+
+            ko.applyBindings(viewModel, document.getElementById("root"));
+        });
+    </script>
+}
