@@ -1,5 +1,8 @@
 ﻿# MVC Homework 1
 
+## 說明
+SQL建置：請將`App_Data\客戶資料.zip`解壓縮到`App_Data`底下
+
 ## 作業要求
 * [x] [資料庫下載連結](https://drive.google.com/open?id=0B9TSNtgzYzPTSGR5TEc4TjcwZmM) or [資料庫SQL下載連結](https://drive.google.com/open?id=1AX0x00BUM3N47mY8fLoaL47QPI_ERbKl)
 * [x] 請使用 "客戶資料" 這個資料庫做開發 (如附件檔案)
