@@ -26,7 +26,7 @@ namespace MVC_Homework1
         {
             using (var context = new 客戶資料Entities())
             {
-                if (!context.客戶資料.Any())
+                if (!context.客戶資料.Any(customer => !customer.已刪除))
                 {
                     var customers = Random客戶資料(50).ToArray();
                     var blanks = customers.SelectMany(c => Random銀行資訊(random.Next(1, 10), c.客戶名稱, c.Id)).ToArray();
@@ -48,10 +48,11 @@ namespace MVC_Homework1
                         Id = number,
                         客戶名稱 = $"Company{number}",
                         統一編號 = RandomNumber(8),
-                        電話 = $"02-{RandomNumber(9)}",
-                        傳真 = $"02-{RandomNumber(9)}",
+                        電話 = $"0{random.Next(1, 9)}-{RandomNumber(9)}",
+                        傳真 = $"0{random.Next(1, 9)}-{RandomNumber(9)}",
                         Email = $"Company{number}@Company{number}.com",
-                        地址 = RandomAddress()
+                        地址 = RandomAddress(),
+                        客戶分類 = ""
                     });
         }
 
@@ -64,7 +65,7 @@ namespace MVC_Homework1
                         客戶Id = 公司Id,
                         銀行名稱 = $"銀行{number}",
                         分行代碼 = number * number,
-                        銀行代碼 = number * 3,
+                        銀行代碼 = number * 3 + random.Next(1, 9),
                         帳戶名稱 = $"{公司名稱}帳戶名稱{number}",
                         帳戶號碼 = RandomNumber(10)
                     });
@@ -79,10 +80,10 @@ namespace MVC_Homework1
                         Id = number,
                         客戶Id = 公司Id,
                         姓名 = name,
-                        Email = $"{name}@{公司名稱}.com",
+                        Email = $"{RandomEnglishName()}{number}@{公司名稱}.com",
                         手機 = $"09{RandomNumber(2)}-{RandomNumber(6)}",
                         職稱 = Random職稱(),
-                        電話 = $"02-{RandomNumber(9)}"
+                        電話 = $"0{random.Next(1, 9)}-{RandomNumber(9)}"
                     });
         }
 
@@ -102,6 +103,16 @@ namespace MVC_Homework1
             int lastNameIndex = random.Next(0, lastNames.Length - 1);
             int firstNameIndex = random.Next(0, firstNames.Length - 1);
             return $"{lastNames[lastNameIndex]}{firstNames[firstNameIndex]}";
+        }
+
+        private static string RandomEnglishName()
+        {
+            string[] lastNames = new[] { "Wang", "Shih", "Lui", "Huang", "Li", "Smith", "Jones", "Taylor", "Brown", "Davies", "Evans", "Wilson", "Thomas", "Johnson", "Roberts", "Thompson", "Wright", "Thompson", "Walker", "White" };
+            string[] firstNames = new[] { "Patrick", "Yun", "Cathy", "Mark", "Mei", "Rabin", "Lisa", "Joy", "Ryan", "Wade", "Arisa", "Winnie", "James", "Carol", "Amity", "Amy", "Alisa", "Belle", "Betty", "Basia", "Claire", "Cherry", "Yanny" };
+
+            int lastNameIndex = random.Next(0, lastNames.Length - 1);
+            int firstNameIndex = random.Next(0, firstNames.Length - 1);
+            return $"{firstNames[firstNameIndex]}_{lastNames[lastNameIndex]}";
         }
 
         private static string RandomAddress()

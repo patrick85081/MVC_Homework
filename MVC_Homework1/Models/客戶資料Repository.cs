@@ -26,7 +26,7 @@ namespace MVC_Homework1.Models
 	            .Where(customer => string.IsNullOrEmpty(category) || category == customer.客戶分類);
 
         public IQueryable<string> Get客戶分類() =>
-	        this.All().Select(customer => customer.客戶分類).Distinct();
+	        this.All().Select(customer => customer.客戶分類).Distinct().DefaultIfEmpty("");
 
 	    public override void Delete(客戶資料 entity)
 	    {

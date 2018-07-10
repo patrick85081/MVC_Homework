@@ -42,7 +42,6 @@ namespace MVC_Homework1.Models
         [ExcelIgnore]
         public bool 已刪除 { get; set; }
 
-        [Required]
         [StringLength(100, ErrorMessage = "欄位長度不得大於 100 個字元")]
         public string 客戶分類 { get; set; }
 
