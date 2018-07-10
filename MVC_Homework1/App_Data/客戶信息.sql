@@ -1,5 +1,5 @@
 ﻿CREATE VIEW 客戶信息
-	AS SELECT [t0].[客戶名稱], (
+	AS SELECT [t0].[Id], [t0].[客戶名稱], (
     SELECT COUNT(*)
     FROM [客戶銀行資訊] AS [t1]
     WHERE [t1].[客戶Id] = [t0].[Id]

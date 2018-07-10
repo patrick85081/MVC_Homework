@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>客戶信息</h2>
 <div id="root"
 >
     @using (Html.BeginForm("Index", "客戶信息", FormMethod.Get,
@@ -14,16 +14,29 @@
         <br />
         <input type="submit" class="btn btn-primary" title="搜尋" value="搜尋" />
     }
-    <hr />
-
-
     
     <table class="table">
         <tr>
-            <th>Id</th>
-            <th>客戶名稱</th>
-            <th>銀行數量</th>
-            <th>聯絡人數量</th>
+            <th>
+                <a href="#" data-bind="click: sortClick('Id')">
+                    Id <span data-bind="css: buildSortClass('Id')"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" data-bind="click: sortClick('客戶名稱')">
+                    客戶名稱 <span data-bind="css: buildSortClass('客戶名稱')"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" data-bind="click: sortClick('銀行數量')">
+                    銀行數量 <span data-bind="css: buildSortClass('銀行數量')"></span>
+                </a>
+            </th>
+            <th>
+                <a href="#" data-bind="click: sortClick('聯絡人數量')">
+                    聯絡人數量 <span data-bind="css: buildSortClass('聯絡人數量')"></span>
+                </a>
+            </th>
         </tr>
         <!-- ko foreach: customers-->
         <tr>
