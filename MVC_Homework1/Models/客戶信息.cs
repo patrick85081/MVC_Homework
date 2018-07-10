@@ -17,5 +17,6 @@ namespace MVC_Homework1.Models
         public string 客戶名稱 { get; set; }
         public Nullable<int> 銀行數量 { get; set; }
         public Nullable<int> 聯絡人數量 { get; set; }
+        public int Id { get; set; }
     }
 }

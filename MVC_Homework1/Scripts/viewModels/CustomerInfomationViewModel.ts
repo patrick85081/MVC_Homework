@@ -5,12 +5,12 @@ class CustomerInfomationViewModel {
     apiUrl: string;
     customers: KnockoutObservableArray<CustomerInfomation> = ko.observableArray([]);
     currentPage = ko.observable(1);
-    pages = ko.observableArray([]);
+    pages = ko.observableArray([1]);
     pageCount = ko.observable(1);
     keyword = ko.observable("");
 
-    sortField = ko.observable("客戶名稱");
-    sortOrder = ko.observable("");
+    sortField = ko.observable("Id");
+    sortOrder = ko.observable("ASC");
 
     constructor(apiUrl: string) {
         this.apiUrl = apiUrl;
@@ -18,31 +18,63 @@ class CustomerInfomationViewModel {
         var queryOption: QueryOption = {
             Keyword: "",
             Page: 1,
-            SortField: "客戶名稱",
+            SortField: "Id",
             SortOrder: "ASC"
         };
 
+        console.log(`constructor`);
+        this.updateDatas(queryOption);
+    }
+
+    pageClick = (page: number) => {
+        console.log(`pageClick Input : ${page}`);
+        if (page != undefined && this.currentPage() !== page && page > 0 && page <= this.pageCount()) {
+
+            this.currentPage(page);
+
+            var queryOption = this.getCurrentQueryOption();
+
+            this.updateDatas(queryOption);
+        }
+    };
+
+    updateDatas = (queryOption: QueryOption) => {
+
+        console.log("post data");
+        console.log(queryOption);
+
         $.ajax({
-            url: this.apiUrl, 
+            url: this.apiUrl,
             method: "POST",
             data: queryOption,
             error: (error) => {
-                
+                console.log(error);
             },
             success: (datas: QueryOptionResult<CustomerInfomation[]>) => {
                 this.customers.removeAll();
                 this.customers.push(...datas.Datas);
                 this.pageCount(datas.PageCount);
 
-                var _pages = Array(datas.PageCount).map((value: number, index: number) => index + 1);
                 this.pages.removeAll();
-                this.pages.push(..._pages);
-                
-                console.log(datas);
+                for (let i = 1; i <= datas.PageCount; i++) {
+                    this.pages.push(i);
+                }
 
+                console.log(datas);
             }
         });
-    }
+    };
+
+    getCurrentQueryOption = () => {
+        var queryOption: QueryOption = {
+            Keyword: this.keyword(),
+            Page: this.currentPage(),
+            SortField: this.sortField(),
+            SortOrder: this.sortOrder()
+        };
+
+        return queryOption;
+    };
 }
 
 interface CustomerInfomation {

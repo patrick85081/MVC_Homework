@@ -19,25 +19,33 @@
     
     <table class="table">
         <tr>
+            <th>Id</th>
             <th>客戶名稱</th>
             <th>銀行數量</th>
             <th>聯絡人數量</th>
         </tr>
         <!-- ko foreach: customers-->
         <tr>
+            <td data-bind="text: Id"></td>
             <td data-bind="text: 客戶名稱"></td>
             <td data-bind="text: 銀行數量"></td>
             <td data-bind="text: 聯絡人數量"></td>
         </tr>
         <!-- /ko-->
     </table>
-    
+
     <ul class="pagination">
-        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li data-bind="css: { disabled: currentPage() <= 1 }">
+            <a href="#"  data-bind="click: pageClick(currentPage() - 1)">&laquo;</a>
+        </li>
         <!-- ko foreach: pages-->
-        <li class="active"><a href="#" data-bind="text: $index() + 1"></a></li>
+        <li data-bind="css: { active: $data == $parent.currentPage() }">
+            <a href="#" data-bind="text: $data, click: $parent.pageClick"></a>
+        </li>
         <!-- /ko-->
-        <li class="disabled"><a href="#">&raquo;</a></li>
+        <li data-bind="css: { disabled: currentPage() >= pageCount() }">
+            <a href="#" data-bind="click: pageClick(currentPage() + 1)">&raquo;</a>
+        </li>
     </ul>
 </div>
 

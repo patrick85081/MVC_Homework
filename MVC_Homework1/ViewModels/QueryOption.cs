@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc.Html;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MVC_Homework1.ViewModels
 {
@@ -12,6 +14,7 @@ namespace MVC_Homework1.ViewModels
         private int pageCount = 0;
         public string Keyword { get; set; } = "";
         public int Page { get; set; } = 1;
+        [JsonConverter(typeof(StringEnumConverter))]
         public SortOrder SortOrder { get; set; } = SortOrder.ASC;
         public string SortField { get; set; } = "Id";
 

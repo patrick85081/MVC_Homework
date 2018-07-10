@@ -59,8 +59,10 @@
 警告 6002: 資料表/檢視 'C:\USERS\PATRICK\DESKTOP\GITPROJECT\MVC_HOMEWORK1\MVC_HOMEWORK1\APP_DATA\客戶資料.MDF.dbo.客戶信息' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="客戶信息">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="客戶名稱" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="客戶名稱" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="銀行數量" Type="int" />
           <Property Name="聯絡人數量" Type="int" />
@@ -127,6 +129,7 @@
           <EntitySet Name="客戶聯絡人" EntityType="Self.客戶聯絡人" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶信息" EntityType="Self.客戶信息" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [客戶信息].[Id] AS [Id], 
     [客戶信息].[客戶名稱] AS [客戶名稱], 
     [客戶信息].[銀行數量] AS [銀行數量], 
     [客戶信息].[聯絡人數量] AS [聯絡人數量]
@@ -282,10 +285,12 @@
         <EntityType Name="客戶信息">
           <Key>
             <PropertyRef Name="客戶名稱" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="客戶名稱" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="銀行數量" Type="Int32" />
           <Property Name="聯絡人數量" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -374,6 +379,7 @@
           <EntitySetMapping Name="客戶信息">
             <EntityTypeMapping TypeName="客戶資料Model.客戶信息">
               <MappingFragment StoreEntitySet="客戶信息">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="聯絡人數量" ColumnName="聯絡人數量" />
                 <ScalarProperty Name="銀行數量" ColumnName="銀行數量" />
                 <ScalarProperty Name="客戶名稱" ColumnName="客戶名稱" />
