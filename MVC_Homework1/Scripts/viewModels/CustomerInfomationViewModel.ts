@@ -4,7 +4,8 @@ class CustomerInfomationViewModel {
 
     apiUrl: string;
     customers: KnockoutObservableArray<CustomerInfomation> = ko.observableArray([]);
-    page = ko.observable(1);
+    currentPage = ko.observable(1);
+    pages = ko.observableArray([]);
     pageCount = ko.observable(1);
     keyword = ko.observable("");
 
@@ -33,6 +34,10 @@ class CustomerInfomationViewModel {
                 this.customers.push(...datas.Datas);
                 this.pageCount(datas.PageCount);
 
+                var _pages = Array(datas.PageCount).map((value: number, index: number) => index + 1);
+                this.pages.removeAll();
+                this.pages.push(..._pages);
+                
                 console.log(datas);
 
             }

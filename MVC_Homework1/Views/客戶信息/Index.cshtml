@@ -34,7 +34,9 @@
     
     <ul class="pagination">
         <li class="disabled"><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
+        <!-- ko foreach: pages-->
+        <li class="active"><a href="#" data-bind="text: $index() + 1"></a></li>
+        <!-- /ko-->
         <li class="disabled"><a href="#">&raquo;</a></li>
     </ul>
 </div>

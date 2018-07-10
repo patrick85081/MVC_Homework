@@ -31,13 +31,15 @@ namespace MVC_Homework1.Controllers
         [HttpPost]
         public JsonResult Data(QueryOption query)
         {
-            var infos = infoRepository.Search(query.Keyword)
-                .OrderBy(query.GetSortString())
-                .GetCurrentPage(query)
-                .ToArray();
+            var sources = infoRepository.Search(query.Keyword);
 
+            var infos = sources.OrderBy(query.GetSortString())
+                .GetCurrentPage(query);
 
-            return Json(new QueryOptionResult<客戶信息[]>(query, infos));
+            query.SetPageCount(sources.GetPageCount(query));
+
+            
+            return Json(new QueryOptionResult<客戶信息[]>(query, infos.ToArray()));
         }
 
         // GET: 客戶信息/Details/5
