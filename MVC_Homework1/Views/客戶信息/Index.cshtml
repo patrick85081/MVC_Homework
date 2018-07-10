@@ -4,18 +4,19 @@
 }
 
 <h2>Index</h2>
-
-@using (Html.BeginForm("Index", "客戶資料", FormMethod.Get, new { @class = "form-group form-group-sm" }))
-{
-    @Html.Label("客戶名稱")
-    @Html.TextBox("Keyword", null, new { @class = "form-control", placeholder = "請輸入客戶名稱" })
-    <br />
-    <input type="submit" class="btn btn-primary" title="搜尋" value="搜尋" />
-}
-<hr />
-
 <div id="root"
-     >
+>
+    @using (Html.BeginForm("Index", "客戶信息", FormMethod.Get,
+        new { @class = "form-group form-group-sm" , data_bind= "submit: searchClick" }))
+    {
+        @Html.Label("客戶名稱")
+        @Html.TextBox("Keyword", null, new { @class = "form-control", placeholder = "請輸入客戶名稱", data_bind="value: keyword" })
+        <br />
+        <input type="submit" class="btn btn-primary" title="搜尋" value="搜尋" />
+    }
+    <hr />
+
+
     
     <table class="table">
         <tr>

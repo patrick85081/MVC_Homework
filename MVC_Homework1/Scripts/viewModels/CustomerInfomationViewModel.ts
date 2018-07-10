@@ -38,6 +38,18 @@ class CustomerInfomationViewModel {
         }
     };
 
+    searchClick = (form: HTMLFormElement) => {
+        console.log(this.keyword());
+        
+        //if(!$(form).valid())
+        //    return false;
+
+        var queryOption = this.getCurrentQueryOption();
+        queryOption.Page = 1;
+
+        this.updateDatas(queryOption);
+    };
+
     updateDatas = (queryOption: QueryOption) => {
 
         console.log("post data");
