@@ -18,22 +18,22 @@
     <table class="table">
         <tr>
             <th>
-                <a href="#" data-bind="click: sortClick('Id')">
+                <a href="#" data-bind="click: function() { sortClick('Id'); }">
                     Id <span data-bind="css: buildSortClass('Id')"></span>
                 </a>
             </th>
             <th>
-                <a href="#" data-bind="click: sortClick('客戶名稱')">
+                <a href="#" data-bind="click: function() { sortClick('客戶名稱'); }">
                     客戶名稱 <span data-bind="css: buildSortClass('客戶名稱')"></span>
                 </a>
             </th>
             <th>
-                <a href="#" data-bind="click: sortClick('銀行數量')">
+                <a href="#" data-bind="click: function() { sortClick('銀行數量'); }">
                     銀行數量 <span data-bind="css: buildSortClass('銀行數量')"></span>
                 </a>
             </th>
             <th>
-                <a href="#" data-bind="click: sortClick('聯絡人數量')">
+                <a href="#" data-bind="click: function() { sortClick('聯絡人數量'); }">
                     聯絡人數量 <span data-bind="css: buildSortClass('聯絡人數量')"></span>
                 </a>
             </th>
@@ -50,7 +50,7 @@
 
     <ul class="pagination">
         <li data-bind="css: { disabled: currentPage() <= 1 }">
-            <a href="#"  data-bind="click: pageClick(currentPage() - 1)">&laquo;</a>
+            <a href="#"  data-bind="click: function() { pageClick(currentPage() - 1); }">&laquo;</a>
         </li>
         <!-- ko foreach: pages-->
         <li data-bind="css: { active: $data == $parent.currentPage() }">
@@ -58,7 +58,7 @@
         </li>
         <!-- /ko-->
         <li data-bind="css: { disabled: currentPage() >= pageCount() }">
-            <a href="#" data-bind="click: pageClick(currentPage() + 1)">&raquo;</a>
+            <a href="#" data-bind="click: function() { pageClick(currentPage() + 1); }">&raquo;</a>
         </li>
     </ul>
 </div>
