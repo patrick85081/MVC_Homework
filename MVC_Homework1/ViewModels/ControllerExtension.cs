@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -35,7 +36,9 @@ namespace MVC_Homework1.ViewModels
         {
             var models = sources.ToList();
             var modelType = typeof(T);
-            var properties = GetOuputProperties<T>(modelType);
+            var metadataType = modelType.GetCustomAttribute<MetadataTypeAttribute>()?
+                .MetadataClassType;
+            var properties = GetOuputProperties<T>(modelType, metadataType);
 
             // Excel Init
             var wb = new XLWorkbook();
@@ -48,7 +51,7 @@ namespace MVC_Homework1.ViewModels
 
                 worksheet.Row(1)
                     .Cell(columnIndex)
-                    .Value = property.Name;
+                    .Value = GetDisplayName(property, metadataType);
             }
 
             // Body
@@ -86,16 +89,23 @@ namespace MVC_Homework1.ViewModels
         /// <typeparam name="T"></typeparam>
         /// <param name="modelType"></param>
         /// <returns></returns>
-        private static List<PropertyInfo> GetOuputProperties<T>(Type modelType)
+        private static List<PropertyInfo> GetOuputProperties<T>(Type modelType, Type metadataType = null)
         {
-            var metadataType = modelType.GetCustomAttribute<MetadataTypeAttribute>()?
-                .MetadataClassType;
-
             var properties = modelType.GetProperties()
                 .Where(property => !IsExcelIgnore(property, metadataType) &&
                                    IsAllowType(property))
                 .ToList();
             return properties;
+        }
+
+        private static string GetDisplayName(PropertyInfo property, Type metadataType = null)
+        {
+            var metadataProperty = metadataType?.GetProperty(property.Name);
+            return metadataProperty?.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName ??
+                   metadataProperty?.GetCustomAttribute<DisplayAttribute>()?.Name ??
+                   property.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName ??
+                   property.GetCustomAttribute<DisplayAttribute>()?.Name ??
+                   property.Name;
         }
 
         /// <summary>
@@ -104,7 +114,7 @@ namespace MVC_Homework1.ViewModels
         /// <param name="property"></param>
         /// <param name="metadataType"></param>
         /// <returns></returns>
-        private static bool IsExcelIgnore(PropertyInfo property, Type metadataType)
+        private static bool IsExcelIgnore(PropertyInfo property, Type metadataType = null)
         {
             return property.GetCustomAttribute(typeof(ExcelIgnoreAttribute)) != null ||
                    metadataType?.GetProperty(property.Name)?.GetCustomAttribute<ExcelIgnoreAttribute>() != null;

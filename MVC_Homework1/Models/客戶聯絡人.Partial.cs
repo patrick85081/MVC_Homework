@@ -35,9 +35,11 @@ namespace MVC_Homework1.Models
     
     public partial class 客戶聯絡人MetaData
     {
+        [DisplayName("客戶聯絡人編號")]
         [Required]
         public int Id { get; set; }
 
+        [DisplayName("客戶編號")]
         [Required]
         public int 客戶Id { get; set; }
         

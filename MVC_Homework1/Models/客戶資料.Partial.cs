@@ -14,6 +14,7 @@ namespace MVC_Homework1.Models
     
     public partial class 客戶資料MetaData
     {
+        [DisplayName("客戶編號")]
         [Required]
         public int Id { get; set; }
         
