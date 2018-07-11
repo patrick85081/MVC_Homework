@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,67 +13,112 @@ namespace MVC_Homework1.ViewModels
 {
     public static class ControllerExtension
     {
+        /// <summary>
+        /// 允許輸出型別
+        /// </summary>
+        private static readonly Type[] allowTypes = new Type[]
+        {
+            typeof(string),
+            typeof(int),
+            typeof(short),
+            typeof(float),
+            typeof(long),
+            typeof(bool),
+            typeof(decimal),
+            typeof(double),
+            typeof(uint),
+            typeof(ulong),
+            typeof(ushort),
+        };
+
         public static ActionResult ExcelFile<T>(this Controller controller, IEnumerable<T> sources,string fileName = "report.xlsx")
         {
-            // 允許輸出型別
-            var allowTypes = new Type[]
-            {
-                typeof(string),
-                typeof(int),
-                typeof(short),
-                typeof(float),
-                typeof(long),
-                typeof(bool),
-                typeof(decimal),
-                typeof(double),
-                typeof(uint),
-                typeof(ulong),
-                typeof(ushort),
-            };
-            var models = sources.ToArray();
+            var models = sources.ToList();
             var modelType = typeof(T);
-            var propertyies = modelType.GetProperties()
-                .Where(p => p.GetCustomAttribute(typeof(ExcelIgnoreAttribute)) == null &&
-                            (allowTypes.Contains(p.PropertyType) ||
-                             p.PropertyType.IsEnum))
-                .ToArray();
+            var properties = GetOuputProperties<T>(modelType);
 
-
+            // Excel Init
             var wb = new XLWorkbook();
             var worksheet = wb.Worksheets.Add(modelType.Name);
 
             // Header
-            for (int columnNumber = 0; columnNumber < propertyies.Length; columnNumber++)
+            foreach (var property in properties)
             {
+                var columnIndex = properties.IndexOf(property) + 1;
+
                 worksheet.Row(1)
-                    .Cell(columnNumber + 1)
-                    .Value = propertyies[columnNumber].Name;
+                    .Cell(columnIndex)
+                    .Value = property.Name;
             }
 
             // Body
-            for (var rowIndex = 0; rowIndex < models.Length; rowIndex ++)
+            foreach (var model in models)
             {
-                var model = models[rowIndex];
-                for (int columnIndex = 0; columnIndex < propertyies.Length; columnIndex++)
+                int rowIndex = models.IndexOf(model) + 2;
+
+                if (rowIndex < 2)
+                    continue;
+
+                foreach (var property in properties)
                 {
-                    worksheet.Row(rowIndex + 2)
-                        .Cell(columnIndex + 1)
-                        .Value = propertyies[columnIndex].GetValue(model);
+                    int columnIndex = properties.IndexOf(property) + 1;
+
+                    worksheet.Row(rowIndex)
+                        .Cell(columnIndex)
+                        .Value = property.GetValue(model);
                 }
             }
 
+            // Save to Stream.
             MemoryStream ms = new MemoryStream();
-            // Debug file
-            wb.SaveAs(controller.Server.MapPath($"~/App_Data/{modelType.Name}.xlsx"));
             wb.SaveAs(ms);
             ms.Position = 0;
+            // Debug file
+            //wb.SaveAs(controller.Server.MapPath($"~/App_Data/{modelType.Name}.xlsx"));
 
             //return new FilePathResult(controller.Server.MapPath($"~/App_Data/{modelType.Name}.xlsx"), "application/octet-stream");
             return new FileStreamResult(ms, "application/vnd.ms-excel") {FileDownloadName = $"{modelType.Name}.xlsx"};
-            //return new EmptyResult(); 
         }
 
-        
+        /// <summary>
+        /// 取得輸出的屬性清單
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="modelType"></param>
+        /// <returns></returns>
+        private static List<PropertyInfo> GetOuputProperties<T>(Type modelType)
+        {
+            var metadataType = modelType.GetCustomAttribute<MetadataTypeAttribute>()?
+                .MetadataClassType;
+
+            var properties = modelType.GetProperties()
+                .Where(property => !IsExcelIgnore(property, metadataType) &&
+                                   IsAllowType(property))
+                .ToList();
+            return properties;
+        }
+
+        /// <summary>
+        /// 是否忽略此屬性
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="metadataType"></param>
+        /// <returns></returns>
+        private static bool IsExcelIgnore(PropertyInfo property, Type metadataType)
+        {
+            return property.GetCustomAttribute(typeof(ExcelIgnoreAttribute)) != null ||
+                   metadataType?.GetProperty(property.Name)?.GetCustomAttribute<ExcelIgnoreAttribute>() != null;
+        }
+
+        /// <summary>
+        /// 此屬性是否可以輸出
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        private static bool IsAllowType(PropertyInfo property)
+        {
+            return (allowTypes.Contains(property.PropertyType) || property.PropertyType.IsEnum);
+        }
     }
 
     [AttributeUsage(AttributeTargets.Property)]
