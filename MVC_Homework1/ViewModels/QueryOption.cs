@@ -12,10 +12,18 @@ namespace MVC_Homework1.ViewModels
     public class QueryOption : ICloneable
     {
         private int pageCount = 0;
+
+        [JsonProperty("keyword")]
         public string Keyword { get; set; } = "";
+
+        [JsonProperty("page")]
         public int Page { get; set; } = 1;
+
+        [JsonProperty("sortOrder")]
         [JsonConverter(typeof(StringEnumConverter))]
         public SortOrder SortOrder { get; set; } = SortOrder.ASC;
+
+        [JsonProperty("sortField")]
         public string SortField { get; set; } = "Id";
 
 
@@ -58,11 +66,13 @@ namespace MVC_Homework1.ViewModels
 
     public class 客戶資料QueryOption : QueryOption
     {
+        [JsonProperty("category")]
         public string Category { get; set; } = "";
     }
 
     public class 客戶聯絡人QueryOption : QueryOption
     {
+        [JsonProperty("job")]
         public string Job { get; set; }
     }
 
@@ -82,7 +92,10 @@ namespace MVC_Homework1.ViewModels
             this.Datas = datas;
         }
 
+        [JsonProperty("datas")]
         public T Datas { get; set; }
+
+        [JsonProperty("pageCount")]
         public int PageCount => GetPageCount();
     }
 

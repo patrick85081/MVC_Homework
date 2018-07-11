@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Homework1.Models;
@@ -12,7 +11,7 @@ using MVC_Homework1.ViewModels;
 
 namespace MVC_Homework1.Controllers
 {
-    public class 客戶信息Controller : Controller
+    public class 客戶信息Controller : BaseController //Controller
     {
         private readonly I客戶信息Repository infoRepository;
 

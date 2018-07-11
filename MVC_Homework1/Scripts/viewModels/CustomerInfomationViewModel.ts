@@ -45,10 +45,10 @@ class CustomerInfomationViewModel {
         this.apiUrl = apiUrl;
 
         var queryOption: QueryOption = {
-            Keyword: "",
-            Page: 1,
-            SortField: "Id",
-            SortOrder: "ASC"
+            keyword: "",
+            page: 1,
+            sortField: "Id",
+            sortOrder: "ASC"
         };
 
         console.log(`constructor`);
@@ -68,13 +68,13 @@ class CustomerInfomationViewModel {
     };
 
     searchClick = (form: HTMLFormElement) => {
-        console.log(this.keyword());
+        console.log(`submit keyword : ${this.keyword()}`);
         
         //if(!$(form).valid())
         //    return false;
 
         var queryOption = this.getCurrentQueryOption();
-        queryOption.Page = 1;
+        queryOption.page = 1;
 
         this.updateDatas(queryOption);
     };
@@ -103,7 +103,7 @@ class CustomerInfomationViewModel {
      */
     updateDatas = (queryOption: QueryOption) => {
 
-        console.log("post data");
+        console.log("post data:");
         console.log(queryOption);
 
         $.ajax({
@@ -112,16 +112,17 @@ class CustomerInfomationViewModel {
             data: queryOption,
             error: (error) => {
                 console.log(error);
-                alert('失敗');
+                alert("失敗");
             },
             success: (datas: QueryOptionResult<CustomerInfomation[]>) => {
                 this.customers.removeAll();
-                this.customers.push(...datas.Datas);
-                this.pageCount(datas.PageCount);
-                this.currentPage(datas.Page);
+                this.customers.push(...datas.datas);
+                this.pageCount(datas.pageCount);
+                this.currentPage(datas.page);
+                this.keyword(datas.keyword);
 
                 this.pages.removeAll();
-                for (let i = 1; i <= datas.PageCount; i++) {
+                for (let i = 1; i <= datas.pageCount; i++) {
                     this.pages.push(i);
                 }
 
@@ -135,10 +136,10 @@ class CustomerInfomationViewModel {
      */
     getCurrentQueryOption = () => {
         var queryOption: QueryOption = {
-            Keyword: this.keyword(),
-            Page: this.currentPage(),
-            SortField: this.sortField(),
-            SortOrder: this.sortOrder()
+            keyword: this.keyword(),
+            page: this.currentPage(),
+            sortField: this.sortField(),
+            sortOrder: this.sortOrder()
         };
 
         return queryOption;
@@ -146,10 +147,10 @@ class CustomerInfomationViewModel {
 
     buildSortClass = (field: string) =>
         ko.pureComputed(() => {
-            var sortIcon = 'glyphicon glyphicon-sort';
+            var sortIcon = "glyphicon glyphicon-sort";
 
             if (field === this.sortField()) {
-                sortIcon += '-by-alphabet';
+                sortIcon += "-by-alphabet";
 
                 if (this.sortOrder() === "DESC") {
                     sortIcon += "-alt";
@@ -168,13 +169,13 @@ interface CustomerInfomation {
 }
 
 interface QueryOption {
-    Keyword: string,
-    Page: number,
-    SortOrder: string,
-    SortField: string,
+    keyword: string,
+    page: number,
+    sortOrder: string,
+    sortField: string,
 }
 
 interface QueryOptionResult<T> extends  QueryOption {
-    PageCount: number,
-    Datas: T,
+    pageCount: number,
+    datas: T,
 }

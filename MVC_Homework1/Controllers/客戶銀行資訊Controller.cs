@@ -11,9 +11,8 @@ using MVC_Homework1.ViewModels;
 
 namespace MVC_Homework1.Controllers
 {
-    public class 客戶銀行資訊Controller : Controller
+    public class 客戶銀行資訊Controller : BaseController //Controller
     {
-        //private 客戶資料Entities db = new 客戶資料Entities();
         private readonly I客戶銀行資訊Repository blankRepository;
         private readonly I客戶資料Repository customeRepository;
 

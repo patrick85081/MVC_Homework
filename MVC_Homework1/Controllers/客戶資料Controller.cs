@@ -12,7 +12,7 @@ using MVC_Homework1.ViewModels;
 
 namespace MVC_Homework1.Controllers
 {
-    public class 客戶資料Controller : Controller
+    public class 客戶資料Controller : BaseController //Controller
     {
         private readonly I客戶資料Repository customerRepository;
 
