@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using MVC_Homework1.ViewModels;
+using MVC_Homework1.Controllers.ActionResults;
 
 namespace MVC_Homework1.Models
 {

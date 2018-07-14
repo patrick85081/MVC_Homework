@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using MVC_Homework1.ViewModels;
+using MVC_Homework1.Controllers.ActionResults;
 
 namespace MVC_Homework1.Controllers
 {

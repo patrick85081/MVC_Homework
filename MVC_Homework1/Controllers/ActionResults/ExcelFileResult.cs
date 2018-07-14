@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using ClosedXML.Excel;
 
-namespace MVC_Homework1.ViewModels
+namespace MVC_Homework1.Controllers.ActionResults
 {
     public class ExcelFileResult<TModel> : FileResult
     {

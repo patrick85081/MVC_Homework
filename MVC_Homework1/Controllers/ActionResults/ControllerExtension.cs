@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace MVC_Homework1.ViewModels
+namespace MVC_Homework1.Controllers.ActionResults
 {
     public static class ControllerExtension
     {

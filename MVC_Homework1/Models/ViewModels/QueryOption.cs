@@ -1,13 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc.Html;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace MVC_Homework1.ViewModels
+namespace MVC_Homework1.Models.ViewModels
 {
     public class QueryOption : ICloneable
     {

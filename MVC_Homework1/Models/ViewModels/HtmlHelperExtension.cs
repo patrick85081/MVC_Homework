@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
 
-namespace MVC_Homework1.ViewModels
+namespace MVC_Homework1.Models.ViewModels
 {
     public static class HtmlHelperExtension
     {

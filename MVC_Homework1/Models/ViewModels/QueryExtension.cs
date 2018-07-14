@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Linq.Dynamic;
-using System.Web;
 
-namespace MVC_Homework1.ViewModels
+namespace MVC_Homework1.Models.ViewModels
 {
     public static class QueryExtension
     {

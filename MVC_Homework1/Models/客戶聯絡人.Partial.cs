@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Linq;
+using MVC_Homework1.Controllers.ActionResults;
 using MVC_Homework1.Models.Validations;
-using MVC_Homework1.ViewModels;
 
 namespace MVC_Homework1.Models
 {

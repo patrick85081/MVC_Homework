@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 
-namespace MVC_Homework1.ViewModels
+namespace MVC_Homework1.Controllers.ActionResults
 {
 
     public class JsonNetResult : JsonResult //ActionResult

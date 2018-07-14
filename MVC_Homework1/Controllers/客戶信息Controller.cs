@@ -7,7 +7,7 @@ using System.Linq.Dynamic;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Homework1.Models;
-using MVC_Homework1.ViewModels;
+using MVC_Homework1.Models.ViewModels;
 
 namespace MVC_Homework1.Controllers
 {

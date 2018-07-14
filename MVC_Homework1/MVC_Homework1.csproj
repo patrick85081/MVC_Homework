@@ -286,13 +286,13 @@
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\ControllerExtension.cs" />
-    <Compile Include="ViewModels\ExcelFileResult.cs" />
-    <Compile Include="ViewModels\ExcelIgnoreAttribute.cs" />
-    <Compile Include="ViewModels\HtmlHelperExtension.cs" />
-    <Compile Include="ViewModels\JsonNetResult.cs" />
-    <Compile Include="ViewModels\QueryExtension.cs" />
-    <Compile Include="ViewModels\QueryOption.cs" />
+    <Compile Include="Controllers\ActionResults\ControllerExtension.cs" />
+    <Compile Include="Controllers\ActionResults\ExcelFileResult.cs" />
+    <Compile Include="Controllers\ActionResults\ExcelIgnoreAttribute.cs" />
+    <Compile Include="Controllers\ActionResults\JsonNetResult.cs" />
+    <Compile Include="Models\ViewModels\HtmlHelperExtension.cs" />
+    <Compile Include="Models\ViewModels\QueryExtension.cs" />
+    <Compile Include="Models\ViewModels\QueryOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
