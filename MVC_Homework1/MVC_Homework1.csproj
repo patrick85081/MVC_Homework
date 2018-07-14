@@ -287,6 +287,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ControllerExtension.cs" />
+    <Compile Include="ViewModels\ExcelFileResult.cs" />
+    <Compile Include="ViewModels\ExcelIgnoreAttribute.cs" />
     <Compile Include="ViewModels\HtmlHelperExtension.cs" />
     <Compile Include="ViewModels\JsonNetResult.cs" />
     <Compile Include="ViewModels\QueryExtension.cs" />

@@ -30,7 +30,6 @@ namespace MVC_Homework1.Controllers
             var source = concatRepository.Search(query.Keyword, query.Job);
 
             var 客戶聯絡人 = source
-                .OrderBy(query.GetSortString())
                 .GetCurrentPage(query);
 
             query.SetPageCount(source.GetPageCount(query));

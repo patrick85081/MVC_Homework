@@ -36,7 +36,6 @@ namespace MVC_Homework1.Controllers
             var source = customerRepository.Search(query.Keyword, query.Category);
 
             var 客戶資料 = source
-                .OrderBy(query.GetSortString())
                 .GetCurrentPage(query);
 
             query.SetPageCount(source.GetPageCount(query));

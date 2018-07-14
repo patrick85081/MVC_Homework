@@ -31,7 +31,7 @@ namespace MVC_Homework1.Controllers
         {
             var sources = infoRepository.Search(query.Keyword);
 
-            var infos = sources.OrderBy(query.GetSortString())
+            var infos = sources
                 .GetCurrentPage(query);
 
             query.SetPageCount(sources.GetPageCount(query));

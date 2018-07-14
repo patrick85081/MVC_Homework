@@ -27,7 +27,7 @@ namespace MVC_Homework1.Controllers
         public ActionResult Index(QueryOption query)
         {
             var source = blankRepository.Search(query.Keyword);
-            var 客戶銀行資訊 = source.OrderBy(blank => blank.Id)
+            var 客戶銀行資訊 = source
                 .GetCurrentPage(query);
 
             query.SetPageCount(source.GetPageCount(query));
