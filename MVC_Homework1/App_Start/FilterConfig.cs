@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using MVC_Homework1.ActionFilters;
 
 namespace MVC_Homework1
 {
@@ -8,6 +9,7 @@ namespace MVC_Homework1
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new ActionWatchAttribute());
         }
     }
 }
