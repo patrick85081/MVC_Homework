@@ -383,6 +383,12 @@
     <Content Include="Views\客戶資料\Edit.cshtml" />
     <Content Include="Views\客戶資料\Index.cshtml" />
     <Content Include="Views\客戶信息\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\客戶聯絡人.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\客戶資料.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\客戶銀行資訊.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\客戶聯絡人.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\客戶銀行資訊.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\客戶資料.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
