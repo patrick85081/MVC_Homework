@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using MVC_Homework1.Controllers.ActionResults;
 using MVC_Homework1.Models;
 using MVC_Homework1.Models.ViewModels;
+using X.PagedList;
 
 namespace MVC_Homework1.Controllers
 {
@@ -22,21 +23,19 @@ namespace MVC_Homework1.Controllers
         {
             var unitOfWork = RepositoryHelper.GetUnitOfWork();
             concatRepository = RepositoryHelper.Get客戶聯絡人Repository(unitOfWork);
-            customerRepository = RepositoryHelper.Get客戶資料Repository();
+            customerRepository = RepositoryHelper.Get客戶資料Repository(unitOfWork);
         }
 
         // GET: 客戶聯絡人
         public ActionResult Index(客戶聯絡人QueryOption query)
         {
-            var source = concatRepository.Search(query.Keyword, query.Job);
+            var 客戶聯絡人 = concatRepository.Search(query.Keyword, query.Job)
+                .OrderBy(query.GetSortString())
+                .ToPagedList(query.Page, query.GetPageSize());
 
-            var 客戶聯絡人 = source
-                .GetCurrentPage(query);
-
-            query.SetPageCount(source.GetPageCount(query));
             ViewBag.QueryOption = query;
 
-            return View(客戶聯絡人.ToList());
+            return View(客戶聯絡人);
         }
 
         public ActionResult ExcelExport()

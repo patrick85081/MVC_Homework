@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using MVC_Homework1.Controllers.ActionResults;
 using MVC_Homework1.Models;
 using MVC_Homework1.Models.ViewModels;
+using X.PagedList;
 
 namespace MVC_Homework1.Controllers
 {
@@ -34,15 +35,13 @@ namespace MVC_Homework1.Controllers
                     Value = c,
                 });
 
-            var source = customerRepository.Search(query.Keyword, query.Category);
+            var 客戶資料 = customerRepository.Search(query.Keyword, query.Category)
+                .OrderBy(query.GetSortString())
+                .ToPagedList(query.Page, query.GetPageSize());
 
-            var 客戶資料 = source
-                .GetCurrentPage(query);
-
-            query.SetPageCount(source.GetPageCount(query));
             ViewBag.QueryOption = query;
 
-            return View(客戶資料.ToList());
+            return View(客戶資料);
         }
 
         public ActionResult ExcelExport()

@@ -1,13 +1,12 @@
 ﻿@using MVC_Homework1.Models.ViewModels
+@using X.PagedList
+@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
 @model IEnumerable<MVC_Homework1.Models.客戶聯絡人>
 
 @{
     ViewBag.Title = "客戶聯絡人";
     客戶聯絡人QueryOption queryOption = this.ViewBag.QueryOption;
-    var keyword = queryOption.Keyword;
-    var job = queryOption.Job;
-    int current = queryOption.Page;
-    int count = queryOption.GetPageCount();
 }
 
 <h2>客戶聯絡人</h2>
@@ -81,4 +80,4 @@
 
 </table>
 
-@Html.BuildPager("Index", queryOption)
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", queryOption.ClonePageOption(page)), PagedListRenderOptionsBase.ClassicPlusFirstAndLast)

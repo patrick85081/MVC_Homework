@@ -31,13 +31,7 @@ namespace MVC_Homework1.Controllers
         {
             var sources = infoRepository.Search(query.Keyword);
 
-            var infos = sources
-                .GetCurrentPage(query);
-
-            query.SetPageCount(sources.GetPageCount(query));
-
-            
-            return Json(new QueryOptionResult<客戶信息[]>(query, infos.ToArray()));
+            return Json(new QueryOptionResult<客戶信息>(query, sources));
         }
 
         protected override void Dispose(bool disposing)

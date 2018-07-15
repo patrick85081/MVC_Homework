@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Homework1.Controllers.ActionResults;
 using MVC_Homework1.Models;
 using MVC_Homework1.Models.ViewModels;
+using X.PagedList;
 
 namespace MVC_Homework1.Controllers
 {
@@ -27,14 +29,13 @@ namespace MVC_Homework1.Controllers
         // GET: 客戶銀行資訊
         public ActionResult Index(QueryOption query)
         {
-            var source = blankRepository.Search(query.Keyword);
-            var 客戶銀行資訊 = source
-                .GetCurrentPage(query);
+            var 客戶銀行資訊 = blankRepository.Search(query.Keyword)
+                .OrderBy(query.GetSortString())
+                .ToPagedList(query.Page, query.GetPageSize());
 
-            query.SetPageCount(source.GetPageCount(query));
             ViewBag.QueryOption = query;
 
-            return View(客戶銀行資訊.ToList());
+            return View(客戶銀行資訊);
         }
 
         public ActionResult ExcelExport()

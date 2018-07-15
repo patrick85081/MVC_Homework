@@ -102,33 +102,5 @@ namespace MVC_Homework1.Models.ViewModels
         }
 
         #endregion Sort Link
-
-        #region Pager
-
-        public static MvcHtmlString BuildPager(this HtmlHelper helper, string actionName, QueryOption query)
-        {
-            var urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
-
-            var current = query.Page;
-            var count = query.GetPageCount();
-            StringBuilder pagerBuilder = new StringBuilder();
-            // header
-            pagerBuilder.Append(
-                $"<li class=\"{(current == 1 ? "disabled" : "")}\"><a href=\"{urlHelper.Action(actionName, query.ClonePageOption(current <= 1 ? 1 : current - 1))}\">&laquo;</a></li>");
-
-            for (int i = 1; i <= count; i++)
-                pagerBuilder.Append(
-                    $"<li class=\"{(current == i ? "active" : "")}\"><a href=\"{urlHelper.Action(actionName, query.ClonePageOption(i))}\">{i}</a></li>");
-
-            // footer
-            pagerBuilder.Append(
-                $"<li class=\"{(current == count ? "disabled" : "")}\"><a href=\"{urlHelper.Action(actionName, query.ClonePageOption(current >= count ? count : current + 1))}\">&raquo;</a></li>");
-
-            return new MvcHtmlString("<ul class=\"pagination\">" +
-                                     $"{pagerBuilder}" +
-                                     $"</ul>");
-        }
-
-        #endregion Pager
     }
 }

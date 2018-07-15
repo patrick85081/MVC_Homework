@@ -1,10 +1,12 @@
 ﻿@using MVC_Homework1.Models.ViewModels
+@using X.PagedList
+@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
 @model IEnumerable<MVC_Homework1.Models.客戶銀行資訊>
 
 @{
     ViewBag.Title = "客戶銀行資訊";
     QueryOption queryOption = this.ViewBag.QueryOption;
-    var keyword = queryOption.Keyword;
 }
 
 <h2>客戶銀行資訊</h2>
@@ -15,8 +17,8 @@
 {
     @Html.Label("銀行名稱")
     @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "請輸入銀行名稱" })
-    <br/>
-    <input type="submit" class="btn btn-primary" value="搜尋"/>
+    <br />
+    <input type="submit" class="btn btn-primary" value="搜尋" />
 }
 <hr />
 <p>
@@ -76,4 +78,5 @@
 
 </table>
 
-@Html.BuildPager("Index", queryOption)
+@*@Html.BuildPager("Index", queryOption)*@
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", queryOption.ClonePageOption(page)), PagedListRenderOptionsBase.ClassicPlusFirstAndLast)

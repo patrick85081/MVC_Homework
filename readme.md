@@ -1,9 +1,29 @@
-﻿# MVC Homework 1
+﻿# MVC Homework
 
 ## 說明
 SQL建置：請將`App_Data\客戶資料.zip`解壓縮到`App_Data`底下
 
-## 作業要求
+## 第二次作業要求
+延續上次作業加以延伸開發
+
+* [ ] 實作在「客戶資料」的詳細資料頁面，加上「客戶聯絡人」清單
+* [ ] 請多加利用範本檢視的開發技巧整理 View 頁面
+* [ ] 讓客戶聯絡人清單支援「批次更新」功能，可批次修改「職稱、手機、電話」這三個欄位，其他欄位不允許修改
+* [ ] 在特定幾個可能發生例外的頁面，特別套用 `[HandleError]` 屬性，針對特定例外給予不同的自訂錯誤頁面，自訂錯誤頁面要能看出發生例外的實際原因
+* [ ] 自訂一個動作過濾器，可以記錄每個 Action 與 ActionResult 執行的時間，資料可以輸出到 Debug 輸出視窗
+* [ ] 套用任意一個現成的網頁版面，可下載免費版面，或使用我在課堂上給你們的版面進行套版
+* [ ] 網頁版面必須要有**主選單(menu)**、每頁都不同的**導覽路標(breadcrumb)**、需用到 `@section`
+* [x] 請使用 `X.PagedList.Mvc` 這個 NuGet 套件實作列表頁的分頁功能
+* [ ] 實作表單驗證機制 (`FormsAuthentication`)  
+　- 要在「客戶資料」表格加上【帳號】、【密碼】欄位  
+　- 密碼欄位須加密或做雜湊處裡(Hash)  
+　- 要有登入、登出功能  
+　- [參考文章](http://blog.miniasp.com/post/2008/02/20/Explain-Forms-Authentication-in-ASPNET-20.aspx)
+* [ ] 客戶登入後只有一個【修改客戶資料】功能，但只能修改【密碼、電話、傳真、地址、Email】等欄位，其他欄位不能被修改或更新。
+
+---
+## 第一次作業要求
+
 * [x] [資料庫下載連結](https://drive.google.com/open?id=0B9TSNtgzYzPTSGR5TEc4TjcwZmM) or [資料庫SQL下載連結](https://drive.google.com/open?id=1AX0x00BUM3N47mY8fLoaL47QPI_ERbKl)
 * [x] 請使用 "客戶資料" 這個資料庫做開發 (如附件檔案)
 * [x] 請實作出「客戶資料管理」、「客戶聯絡人管理」與「客戶銀行帳戶管理」等簡易 CRUD 功能 (盡量做各種功能出來)
