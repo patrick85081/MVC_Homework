@@ -117,6 +117,26 @@ namespace MVC_Homework1.Controllers
             return View(客戶聯絡人);
         }
 
+        [HttpPost]
+        public ActionResult BatchUpdate(IList<客戶聯絡人BatchViewModel> concats, 客戶聯絡人QueryOption query)
+        {
+            ViewBag.QueryOption = query;
+            if (ModelState.IsValid)
+            {
+                foreach (var viewModel in concats)
+                {
+                    var concat = concatRepository.Find(viewModel.Id);
+                    concat.職稱 = viewModel.職稱;
+                    concat.手機 = viewModel.手機;
+                    concat.電話 = viewModel.電話;
+                }
+                concatRepository.UnitOfWork.Commit();
+                return RedirectToAction("Index", query);
+            }
+
+            return Index(query);
+        }
+
         // GET: 客戶聯絡人/Delete/5
         public ActionResult Delete(int? id)
         {
