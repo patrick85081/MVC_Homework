@@ -10,6 +10,8 @@
     <h4>客戶資料</h4>
     <hr />
     @Html.DisplayForModel()
+    
+    @Html.Action("ConcatDetail", new {id = Model.Id})
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

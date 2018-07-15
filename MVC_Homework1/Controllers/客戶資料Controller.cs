@@ -64,6 +64,15 @@ namespace MVC_Homework1.Controllers
             return View(客戶資料);
         }
 
+        [ChildActionOnly]
+        public ActionResult ConcatDetail(int id)
+        {
+            var concats = customerRepository.Find(id)
+                .客戶聯絡人;
+
+            return PartialView(concats);
+        }
+
         // GET: 客戶資料/Create
         public ActionResult Create()
         {
