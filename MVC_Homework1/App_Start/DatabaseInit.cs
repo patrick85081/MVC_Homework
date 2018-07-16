@@ -52,7 +52,8 @@ namespace MVC_Homework1
                         傳真 = $"0{random.Next(1, 9)}-{RandomNumber(9)}",
                         Email = $"Company{number}@Company{number}.com",
                         地址 = RandomAddress(),
-                        客戶分類 = ""
+                        客戶分類 = "",
+                        帳號 = $"Company{number}"
                     });
         }
 

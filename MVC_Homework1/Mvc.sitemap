@@ -8,29 +8,30 @@
     <mvcSiteMapNode title="聯絡人" controller="Home" action="Contact"/>
 
     <mvcSiteMapNode title="客戶資料" controller="客戶資料" action="Index">
-      <mvcSiteMapNode title="新增客戶資料" controller="客戶資料" action="Create"/>
-      <mvcSiteMapNode title="編輯客戶資料" controller="客戶資料" action="Edit"/>
-      <mvcSiteMapNode title="詳細客戶資料" controller="客戶資料" action="Details"/>
-      <mvcSiteMapNode title="刪除客戶資料" controller="客戶資料" action="Delete"/>
+      <mvcSiteMapNode title="新增客戶資料" controller="客戶資料" action="Create" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="編輯客戶資料" controller="客戶資料" action="Edit" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="詳細客戶資料" controller="客戶資料" action="Details" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="刪除客戶資料" controller="客戶資料" action="Delete" preservedRouteParameters="id" />
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="客戶聯絡人" controller="客戶聯絡人" action="Index">
-      <mvcSiteMapNode title="新增客戶聯絡人" controller="客戶聯絡人" action="Create"/>
-      <mvcSiteMapNode title="編輯客戶聯絡人" controller="客戶聯絡人" action="Edit"/>
-      <mvcSiteMapNode title="詳細客戶聯絡人" controller="客戶聯絡人" action="Details"/>
-      <mvcSiteMapNode title="刪除客戶聯絡人" controller="客戶聯絡人" action="Delete"/>
+      <mvcSiteMapNode title="新增客戶聯絡人" controller="客戶聯絡人" action="Create" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="編輯客戶聯絡人" controller="客戶聯絡人" action="Edit" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="詳細客戶聯絡人" controller="客戶聯絡人" action="Details" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="刪除客戶聯絡人" controller="客戶聯絡人" action="Delete" preservedRouteParameters="id" />
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="客戶銀行資訊" controller="客戶銀行資訊" action="Index">
-      <mvcSiteMapNode title="新增客戶銀行資訊" controller="客戶銀行資訊" action="Create"/>
-      <mvcSiteMapNode title="編輯客戶銀行資訊" controller="客戶銀行資訊" action="Edit"/>
-      <mvcSiteMapNode title="詳細客戶銀行資訊" controller="客戶銀行資訊" action="Details"/>
-      <mvcSiteMapNode title="刪除客戶銀行資訊" controller="客戶銀行資訊" action="Delete"/>
+    <mvcSiteMapNode title="客戶銀行資訊" controller="客戶銀行資訊" action="Index" roles="Admin,Customer">
+      <mvcSiteMapNode title="新增客戶銀行資訊" controller="客戶銀行資訊" action="Create" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="編輯客戶銀行資訊" controller="客戶銀行資訊" action="Edit" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="詳細客戶銀行資訊" controller="客戶銀行資訊" action="Details" preservedRouteParameters="id" />
+      <mvcSiteMapNode title="刪除客戶銀行資訊" controller="客戶銀行資訊" action="Delete" preservedRouteParameters="id" />
     </mvcSiteMapNode>
     <mvcSiteMapNode title="AJAX 客戶信息" controller="客戶信息" action="Index"/>
 
 
     <mvcSiteMapNode title="會員登入" controller="Account" action="Login"/>
+    <mvcSiteMapNode title="個資修改" controller="Account" action="ProfileEdit"/>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

@@ -4,18 +4,10 @@
 @{
     ViewBag.Title = "會員登入";
 }
-
-@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
-{
-    @*<script>
-        alert('@ViewBag.ErrorMessage');
-    </script>*@
-
-<div class="alert alert-danger alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>錯誤!</strong> @ViewBag.ErrorMessage.
-</div>
-}
+<pre>
+預設帳號密碼為 1234，請登入後於<b>個資資料修改頁面</b>修改密碼。
+備註：<b>客戶資料</b>、<b>客戶銀行資訊</b>、<b>客戶聯絡人</b>需要登入後才可瀏覽。
+</pre>
 
 @using (Html.BeginForm()) 
 {

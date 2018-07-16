@@ -14,6 +14,7 @@ using X.PagedList;
 
 namespace MVC_Homework1.Controllers
 {
+    [Authorize(Roles = "Admin,Customer")]
     public class 客戶銀行資訊Controller : BaseController //Controller
     {
         private readonly I客戶銀行資訊Repository blankRepository;

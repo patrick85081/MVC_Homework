@@ -46,6 +46,15 @@ namespace MVC_Homework1.Models
         [StringLength(100, ErrorMessage = "欄位長度不得大於 100 個字元")]
         public string 客戶分類 { get; set; }
 
+        [DisplayName("帳號")]
+        [Required]
+        public string 帳號 { get; set; }
+
+        [DisplayName("密碼")]
+        [DataType(DataType.Password)]
+        [Required]
+        public string 密碼 { get; set; }
+
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }
         public virtual ICollection<客戶聯絡人> 客戶聯絡人 { get; set; }
     }

@@ -138,10 +138,11 @@
                         </li>
                     </ul>
                 </li>*@
+
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.Name <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.Name 您好！<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             @*<li>
                                 <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -152,9 +153,15 @@
                             <li>
                                 <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                             </li>*@
+                            @if (Context.User.IsInRole("Customer"))
+                            {
+                                <li>
+                                    <a href="@Url.Action("ProfileEdit", "Account")"><i class="fa fa-fw fa-user"></i> 個資修改</a>
+                                </li>
+                            }
                             <li class="divider"></li>
                             <li>
-                                <a href="@Url.Action("Logout", "Account")"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <a href="@Url.Action("Logout", "Account")"><i class="fa fa-fw fa-power-off"></i> 登出</a>
                             </li>
                         </ul>
                     </li>
@@ -162,7 +169,7 @@
                 else
                 {
                     <li>
-                        <a href="@Url.Action("Login", "Account")">登入</a>
+                        <a href="@Url.Action("Login", "Account")">會員登入</a>
                     </li>
                 }
             </ul>
@@ -209,10 +216,15 @@
                     @*@Html.MenuActionLink("首頁", "Index", "Home")*@
                     @Html.MenuActionLink("關於", "About", "Home")
                     @Html.MenuActionLink("連絡人", "Contact", "Home")
-                    @Html.MenuActionLink("客戶資料", "Index", "客戶資料", null, Match.Controller)
-                    @Html.MenuActionLink("客戶連絡人", "Index", "客戶聯絡人", null, Match.Controller)
-                    @Html.MenuActionLink("客戶銀行資訊", "Index", "客戶銀行資訊", null, Match.Controller)
+                    @if (Context.User.IsInRole("Admin") || Context.User.IsInRole("Customer"))
+                    {
+                        @Html.MenuActionLink("客戶資料", "Index", "客戶資料", null, Match.Controller)
+                        @Html.MenuActionLink("客戶連絡人", "Index", "客戶聯絡人", null, Match.Controller)
+                        @Html.MenuActionLink("客戶銀行資訊", "Index", "客戶銀行資訊", null, Match.Controller)
+                    }
                     @Html.MenuActionLink("AJAX客戶信息", "Index", "客戶信息", null, Match.Controller)
+                    
+                    @*@Html.MvcSiteMap().Menu()*@
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -241,7 +253,14 @@
                     </div>
                     <!-- /.row -->
                 }
-                
+
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>錯誤!</strong> @ViewBag.ErrorMessage.
+                    </div>
+                }
             
                 @RenderBody()
                 @*<div class="row">
