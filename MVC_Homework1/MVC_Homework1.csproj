@@ -292,9 +292,10 @@
     <Compile Include="Controllers\ActionResults\ExcelFileResult.cs" />
     <Compile Include="Controllers\ActionResults\ExcelIgnoreAttribute.cs" />
     <Compile Include="Controllers\ActionResults\JsonNetResult.cs" />
-    <Compile Include="Models\ViewModels\HtmlHelperExtension.cs" />
     <Compile Include="Models\ViewModels\QueryExtension.cs" />
     <Compile Include="Models\ViewModels\QueryOption.cs" />
+    <Compile Include="Utils\HtmlHelperExtension.cs" />
+    <Compile Include="Utils\WebViewPageExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -386,6 +387,7 @@
     <Content Include="Views\Shared\EditorTemplates\客戶銀行資訊.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\客戶資料.cshtml" />
     <Content Include="Views\客戶資料\ConcatDetail.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

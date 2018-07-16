@@ -4,8 +4,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
+using MVC_Homework1.Models.ViewModels;
 
-namespace MVC_Homework1.Models.ViewModels
+namespace MVC_Homework1.Utils
 {
     public static class HtmlHelperExtension
     {
@@ -102,5 +104,41 @@ namespace MVC_Homework1.Models.ViewModels
         }
 
         #endregion Sort Link
+
+        #region Menu Link
+
+        public static MvcHtmlString MenuActionLink(this HtmlHelper htmlHelper, string linkText, string actionName, string controllerName,
+            object routeValues = null, Match match = Match.ControllerAndAction)
+        {
+            bool isActive = match > 0;
+
+            if (match.HasFlag(Match.Action))
+                isActive = htmlHelper.GetCurrentAction() == actionName && isActive;
+            if (match.HasFlag(Match.Controller))
+                isActive = htmlHelper.GetCurrentController() == controllerName && isActive;
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"<li{(isActive ? " class=\"active\"" : "")}>");
+            sb.Append(htmlHelper.ActionLink(linkText, actionName, controllerName, routeValues, null));
+            sb.Append("</li>");
+
+            return new MvcHtmlString(sb.ToString());
+        }
+
+        #endregion
+
+        public static string GetCurrentController(this HtmlHelper htmlHelper) =>
+            htmlHelper.ViewContext.RouteData.Values["controller"].ToString();
+
+        public static string GetCurrentAction(this HtmlHelper htmlHelper) =>
+            htmlHelper.ViewContext.RouteData.Values["action"].ToString();
+    }
+
+    [Flags]
+    public enum Match
+    {
+        None = 0,
+        Controller = 1,
+        Action = 2,
+        ControllerAndAction = Controller | Action,
     }
 }
