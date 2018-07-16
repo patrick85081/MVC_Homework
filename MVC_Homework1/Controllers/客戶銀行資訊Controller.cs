@@ -104,17 +104,19 @@ namespace MVC_Homework1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,客戶Id,銀行名稱,銀行代碼,分行代碼,帳戶名稱,帳戶號碼")] 客戶銀行資訊 客戶銀行資訊)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var blank = blankRepository.Find(id);
+            if (blank == null)
+                return HttpNotFound();
+
+            if (TryUpdateModel(blank))
             {
-                var db = blankRepository.UnitOfWork.Context;
-                db.Entry(客戶銀行資訊).State = EntityState.Modified;
-                db.SaveChanges();
+                blankRepository.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
-            ViewBag.客戶Id = new SelectList(customeRepository.All(), "Id", "客戶名稱", 客戶銀行資訊.客戶Id);
-            return View(客戶銀行資訊);
+            ViewBag.客戶Id = new SelectList(customeRepository.All(), "Id", "客戶名稱", blank.客戶Id);
+            return View(blank);
         }
 
         // GET: 客戶銀行資訊/Delete/5

@@ -104,17 +104,20 @@ namespace MVC_Homework1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話")] 客戶聯絡人 客戶聯絡人)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var concat = concatRepository.Find(id);
+            if (concat == null)
+                return HttpNotFound();
+
+            if (TryUpdateModel(concat))
             {
-                var db = concatRepository.UnitOfWork.Context;
-                db.Entry(客戶聯絡人).State = EntityState.Modified;
-                db.SaveChanges();
+                concatRepository.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
-            ViewBag.客戶Id = new SelectList(customerRepository.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
-            return View(客戶聯絡人);
+
+            ViewBag.客戶Id = new SelectList(customerRepository.All(), "Id", "客戶名稱", concat.客戶Id);
+            return View(concat);
         }
 
         [HttpPost]

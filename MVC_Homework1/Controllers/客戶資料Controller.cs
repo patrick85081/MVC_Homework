@@ -116,16 +116,18 @@ namespace MVC_Homework1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email,客戶分類")] 客戶資料 客戶資料)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var customer = customerRepository.Find(id);
+            if (customer == null)
+                return HttpNotFound();
+
+            if (TryUpdateModel(customer))
             {
-                var db = customerRepository.UnitOfWork.Context;
-                db.Entry(客戶資料).State = EntityState.Modified;
-                db.SaveChanges();
+                customerRepository.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
-            return View(客戶資料);
+            return View(customer);
         }
 
         // GET: 客戶資料/Delete/5
