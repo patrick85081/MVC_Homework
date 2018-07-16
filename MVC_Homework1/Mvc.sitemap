@@ -28,6 +28,9 @@
       <mvcSiteMapNode title="刪除客戶銀行資訊" controller="客戶銀行資訊" action="Delete"/>
     </mvcSiteMapNode>
     <mvcSiteMapNode title="AJAX 客戶信息" controller="客戶信息" action="Index"/>
+
+
+    <mvcSiteMapNode title="會員登入" controller="Account" action="Login"/>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

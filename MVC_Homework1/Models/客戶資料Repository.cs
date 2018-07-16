@@ -28,7 +28,13 @@ namespace MVC_Homework1.Models
         public IQueryable<string> Get客戶分類() =>
 	        this.All().Select(customer => customer.客戶分類).Distinct().DefaultIfEmpty("");
 
-	    public override void Delete(客戶資料 entity)
+	    public 客戶資料 Login(string account, string password)
+	    {
+	        return this.All().FirstOrDefault(customer => customer.帳號 == account &&
+	                                                     customer.密碼 == password);
+	    }
+
+        public override void Delete(客戶資料 entity)
 	    {
 	        entity.已刪除 = true;
 	    }
@@ -40,5 +46,6 @@ namespace MVC_Homework1.Models
 	    IQueryable<客戶資料> Search(string keyword);
 	    IQueryable<string> Get客戶分類();
 	    IQueryable<客戶資料> Search(string keyword, string category);
-	}
+	    客戶資料 Login(string account, string password);
+    }
 }

@@ -191,6 +191,7 @@
     <Compile Include="App_Start\DatabaseInit.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\客戶信息Controller.cs" />
@@ -244,6 +245,7 @@
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Validations\CellPhoneValdationAttribute.cs" />
+    <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\客戶聯絡人BatchViewModel.cs" />
     <Compile Include="Models\客戶信息.cs">
       <DependentUpon>客戶資料.tt</DependentUpon>
@@ -304,6 +306,7 @@
     <Compile Include="Models\ViewModels\QueryExtension.cs" />
     <Compile Include="Models\ViewModels\QueryOption.cs" />
     <Compile Include="Utils\HtmlHelperExtension.cs" />
+    <Compile Include="Utils\StringExtension.cs" />
     <Compile Include="Utils\WebViewPageExtension.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +412,8 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LoginViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

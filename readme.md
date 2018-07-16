@@ -14,7 +14,7 @@ SQL建置：請將`App_Data\客戶資料.zip`解壓縮到`App_Data`底下
 * [x] 套用任意一個現成的網頁版面，可下載免費版面，或使用我在課堂上給你們的版面進行套版
 * [x] 網頁版面必須要有**主選單(menu)**、每頁都不同的**導覽路標(breadcrumb)**、需用到 `@section`
 * [x] 請使用 `X.PagedList.Mvc` 這個 NuGet 套件實作列表頁的分頁功能
-* [ ] 實作表單驗證機制 (`FormsAuthentication`)  
+* [x] 實作表單驗證機制 (`FormsAuthentication`)  
 　- 要在「客戶資料」表格加上【帳號】、【密碼】欄位  
 　- 密碼欄位須加密或做雜湊處裡(Hash)  
 　- 要有登入、登出功能  
