@@ -30,7 +30,18 @@ namespace MVC_Homework1.Controllers
         // GET: 客戶聯絡人
         public ActionResult Index(客戶聯絡人QueryOption query)
         {
-            var 客戶聯絡人 = concatRepository.Search(query.Keyword, query.Job)
+            var 客戶聯絡人 = concatRepository.Search(query.Keyword, query.Job, query.CustomerName)
+                .Select(concat => new 客戶聯絡人ViewModel()
+                {
+                    Id = concat.Id,
+                    客戶Id = concat.客戶Id,
+                    姓名 = concat.姓名,
+                    客戶名稱 = concat.客戶資料.客戶名稱,
+                    Email = concat.Email,
+                    電話 = concat.電話,
+                    手機 = concat.手機,
+                    職稱 = concat.職稱
+                })
                 .OrderBy(query.GetSortString())
                 .ToPagedList(query.Page, query.GetPageSize());
 

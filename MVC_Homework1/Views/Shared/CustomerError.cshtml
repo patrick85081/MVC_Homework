@@ -1,0 +1,27 @@
+﻿@using System.Data.Entity.Validation
+@model HandleErrorInfo
+
+@{
+    ViewBag.Title = $"{Model.Exception.GetType().Name} 錯誤";
+    ViewBag.Overview = "處理您的要求時發生錯誤。";
+
+    string message;
+    if (Model.Exception is DbEntityValidationException)
+    {
+        message = "Entity 發生錯誤";
+        message += string.Join("<br/>", (from vError in (Model.Exception as DbEntityValidationException).EntityValidationErrors
+            from err in vError.ValidationErrors
+            select $"{err.PropertyName} {err.ErrorMessage}"));
+        message += $"<br/>{Model.Exception}";
+    }
+    else
+    {
+        message = Model.Exception.ToString();
+    }
+
+}
+<hgroup>
+<pre>
+@Html.Raw(message)
+</pre>
+</hgroup>

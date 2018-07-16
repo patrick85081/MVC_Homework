@@ -24,9 +24,12 @@ namespace MVC_Homework1.Models
 	    public IQueryable<客戶聯絡人> Search(string keyword, string job) =>
 	        Search(keyword)
 	            .Where(concat => string.IsNullOrEmpty(job) || concat.職稱 == job);
-	    
 
-	    public override void Delete(客戶聯絡人 entity)
+	    public IQueryable<客戶聯絡人> Search(string keyword, string job, string 客戶名稱) =>
+	        Search(keyword, job)
+	            .Where(concat => string.IsNullOrEmpty(客戶名稱) || concat.客戶資料.客戶名稱 == 客戶名稱);
+
+        public override void Delete(客戶聯絡人 entity)
 	    {
 	        entity.已刪除 = true;
 	    }
@@ -37,5 +40,6 @@ namespace MVC_Homework1.Models
         客戶聯絡人 Find(int? id);
         IQueryable<客戶聯絡人> Search(string keyword);
         IQueryable<客戶聯絡人> Search(string keyword, string job);
+        IQueryable<客戶聯絡人> Search(string keyword, string job, string 客戶名稱);
     }
 }

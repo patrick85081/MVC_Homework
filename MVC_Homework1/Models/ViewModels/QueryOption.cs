@@ -62,6 +62,9 @@ namespace MVC_Homework1.Models.ViewModels
     {
         [JsonProperty("job")]
         public string Job { get; set; }
+
+        [JsonProperty("customerName")]
+        public string CustomerName { get; set; }
     }
 
     /// <summary>
