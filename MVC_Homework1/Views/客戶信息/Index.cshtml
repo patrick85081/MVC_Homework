@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AJAX 客戶信息";
 }
 
-<h2>客戶信息</h2>
+
 <div id="root">
     @using (Html.BeginForm("Index", "客戶信息", FormMethod.Get,
         new { @class = "form-group form-group-sm", data_bind = "submit: searchClick" }))

@@ -15,14 +15,14 @@ namespace MVC_Homework1.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Overview = "Your application description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Overview = "Your contact page.";
 
             return View();
         }
