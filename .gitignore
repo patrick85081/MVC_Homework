@@ -264,3 +264,4 @@ __pycache__/
 */App_Data/*.xls
 */Scripts/viewModels/*.js
 */Scripts/viewModels/*.js.map
+*.pubxml
