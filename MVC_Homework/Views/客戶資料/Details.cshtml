@@ -1,0 +1,17 @@
+﻿@model MVC_Homework.Models.客戶資料
+
+@{
+    ViewBag.Title = "資料詳細客戶";
+}
+
+
+<div>
+    <hr />
+    @Html.DisplayForModel()
+    
+    @Html.Action("ConcatDetail", new {id = Model.Id})
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

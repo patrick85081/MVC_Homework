@@ -1,0 +1,16 @@
+﻿@model MVC_Homework.Models.客戶聯絡人
+
+@{
+    ViewBag.Title = "詳細客戶聯絡人";
+}
+
+
+
+<div>
+    <hr />
+    @Html.DisplayForModel()
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

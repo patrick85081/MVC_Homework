@@ -1,0 +1,98 @@
+﻿@using DocumentFormat.OpenXml.Office2010.CustomUI
+@using MVC_Homework.Models.ViewModels
+@using MVC_Homework.Utils
+@using X.PagedList
+@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
+@model IEnumerable<客戶聯絡人ViewModel>
+
+@{
+    ViewBag.Title = "客戶聯絡人";
+    客戶聯絡人QueryOption queryOption = this.ViewBag.QueryOption;
+    var concats = Model.ToList();
+}
+
+
+<a href="@Url.Action("ExcelExport")">匯出報表</a>
+<hr />
+
+@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get, new { @class = "form-group form-group-sm" }))
+{
+    @Html.Label("姓名")
+    @Html.TextBox("keyword", null, new { @class = "form-control", placeholder = "請輸入聯絡人姓名" })
+    @Html.Label("職稱")
+    @Html.TextBox("job", null, new { @class = "form-control", placeholder = "請輸入職稱" })
+    @Html.Label("客戶名稱")
+    @Html.TextBox("CustomerName", null, new { @class = "form-control", placeholder = "請輸入職稱" })
+    <br />
+    <input type="submit" class="btn btn-primary" title="搜尋" value="搜尋" />
+}
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("BatchUpdate", "客戶聯絡人", queryOption, FormMethod.Post, null))
+{
+    <table class="table table-bordered table-striped table-hover table-responsive">
+        <thead>
+        <tr>
+            <th>
+                @Html.BuildSortLink(model => model.職稱, "Index", queryOption)
+            </th>
+            <th>
+                @Html.BuildSortLink(model => model.姓名, "Index", queryOption)
+            </th>
+            <th>
+                @Html.BuildSortLink(model => model.Email, "Index", queryOption)
+            </th>
+            <th>
+                @Html.BuildSortLink(model => model.手機, "Index", queryOption)
+            </th>
+            <th>
+                @Html.BuildSortLink(model => model.電話, "Index", queryOption)
+            </th>
+            <th>
+                @Html.BuildSortLink(model => model.客戶名稱, "Index", queryOption)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var item in concats)
+        {
+            var i = concats.IndexOf(item);
+
+            @Html.HiddenFor(modelItem => concats[i].Id)
+            <tr>
+                <td>
+                    @Html.EditorFor(modelItem => concats[i].職稱, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => concats[i].姓名)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => concats[i].Email)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => concats[i].手機, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => concats[i].電話, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => concats[i].客戶名稱)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                    @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <input type="submit" value="批次更新" class="btn btn-primary"/>
+}
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", queryOption.ClonePageOption(page)), PagedListRenderOptionsBase.ClassicPlusFirstAndLast)
