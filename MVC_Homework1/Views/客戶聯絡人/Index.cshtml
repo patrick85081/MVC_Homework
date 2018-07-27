@@ -66,7 +66,7 @@
             @Html.HiddenFor(modelItem => concats[i].Id)
             <tr>
                 <td>
-                    @Html.EditorFor(modelItem => concats[i].職稱)
+                    @Html.EditorFor(modelItem => concats[i].職稱, new { htmlAttributes = new { @class = "form-control" } })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => concats[i].姓名)
@@ -75,10 +75,10 @@
                     @Html.DisplayFor(modelItem => concats[i].Email)
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => concats[i].手機)
+                    @Html.EditorFor(modelItem => concats[i].手機, new { htmlAttributes = new { @class = "form-control" } })
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => concats[i].電話)
+                    @Html.EditorFor(modelItem => concats[i].電話, new { htmlAttributes = new { @class = "form-control" } })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => concats[i].客戶名稱)

@@ -20,11 +20,17 @@ namespace MVC_Homework1.Controllers
         private readonly I客戶銀行資訊Repository blankRepository;
         private readonly I客戶資料Repository customeRepository;
 
-        public 客戶銀行資訊Controller()
+        //public 客戶銀行資訊Controller()
+        //{
+        //    var unitOfWord = RepositoryHelper.GetUnitOfWork();
+        //    blankRepository = RepositoryHelper.Get客戶銀行資訊Repository(unitOfWord);
+        //    customeRepository = RepositoryHelper.Get客戶資料Repository(unitOfWord);
+        //}
+
+        public 客戶銀行資訊Controller(I客戶銀行資訊Repository blankRepository, I客戶資料Repository customeRepository)
         {
-            var unitOfWord = RepositoryHelper.GetUnitOfWork();
-            blankRepository = RepositoryHelper.Get客戶銀行資訊Repository(unitOfWord);
-            customeRepository = RepositoryHelper.Get客戶資料Repository(unitOfWord);
+            this.blankRepository = blankRepository;
+            this.customeRepository = customeRepository;
         }
 
         // GET: 客戶銀行資訊

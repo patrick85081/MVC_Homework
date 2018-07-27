@@ -15,9 +15,14 @@ namespace MVC_Homework1.Controllers
     {
         private readonly I客戶資料Repository customerRespository;
 
-        public AccountController()
+        //public AccountController()
+        //{
+        //    customerRespository = RepositoryHelper.Get客戶資料Repository();
+        //}
+
+        public AccountController(I客戶資料Repository customerRespository)
         {
-            customerRespository = RepositoryHelper.Get客戶資料Repository();
+            this.customerRespository = customerRespository;
         }
 
         // GET: Acount

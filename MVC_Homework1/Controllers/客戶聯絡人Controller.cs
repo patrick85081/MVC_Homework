@@ -20,11 +20,17 @@ namespace MVC_Homework1.Controllers
         private readonly I客戶聯絡人Repository concatRepository;
         private readonly I客戶資料Repository customerRepository;
 
-        public 客戶聯絡人Controller()
+        //public 客戶聯絡人Controller()
+        //{
+        //    var unitOfWork = RepositoryHelper.GetUnitOfWork();
+        //    concatRepository = RepositoryHelper.Get客戶聯絡人Repository(unitOfWork);
+        //    customerRepository = RepositoryHelper.Get客戶資料Repository(unitOfWork);
+        //}
+
+        public 客戶聯絡人Controller(I客戶聯絡人Repository concatRepository, I客戶資料Repository customerRepository)
         {
-            var unitOfWork = RepositoryHelper.GetUnitOfWork();
-            concatRepository = RepositoryHelper.Get客戶聯絡人Repository(unitOfWork);
-            customerRepository = RepositoryHelper.Get客戶資料Repository(unitOfWork);
+            this.concatRepository = concatRepository;
+            this.customerRepository = customerRepository;
         }
 
         // GET: 客戶聯絡人

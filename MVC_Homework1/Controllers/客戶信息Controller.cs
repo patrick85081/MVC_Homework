@@ -15,9 +15,14 @@ namespace MVC_Homework1.Controllers
     {
         private readonly I客戶信息Repository infoRepository;
 
-        public 客戶信息Controller()
+        //public 客戶信息Controller()
+        //{
+        //    infoRepository = RepositoryHelper.Get客戶信息Repository();
+        //}
+
+        public 客戶信息Controller(I客戶信息Repository infoRepository)
         {
-            infoRepository = RepositoryHelper.Get客戶信息Repository();
+            this.infoRepository = infoRepository;
         }
 
         // GET: 客戶信息
