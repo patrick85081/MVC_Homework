@@ -2,32 +2,33 @@
 <mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+  
+  <!--https://github.com/maartenba/MvcSiteMapProvider/wiki/Configuring-MvcSiteMapProvider-->
+  <mvcSiteMapNode title="Home" controller="Home" action="Index" visible="false">
+    <mvcSiteMapNode title="關於" controller="Home" action="About" visible="true"/>
+    <mvcSiteMapNode title="聯絡人" controller="Home" action="Contact" visible="true"/>
 
-  <mvcSiteMapNode title="Home" controller="Home" action="Index">
-    <mvcSiteMapNode title="關於" controller="Home" action="About"/>
-    <mvcSiteMapNode title="聯絡人" controller="Home" action="Contact"/>
-
-    <mvcSiteMapNode title="客戶資料" controller="客戶資料" action="Index">
+    <mvcSiteMapNode title="客戶資料" controller="客戶資料" action="Index" roles="Admin,Customer" visible="true">
       <mvcSiteMapNode title="新增客戶資料" controller="客戶資料" action="Create" preservedRouteParameters="id" />
       <mvcSiteMapNode title="編輯客戶資料" controller="客戶資料" action="Edit" preservedRouteParameters="id" />
       <mvcSiteMapNode title="詳細客戶資料" controller="客戶資料" action="Details" preservedRouteParameters="id" />
       <mvcSiteMapNode title="刪除客戶資料" controller="客戶資料" action="Delete" preservedRouteParameters="id" />
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="客戶聯絡人" controller="客戶聯絡人" action="Index">
+    <mvcSiteMapNode title="客戶聯絡人" controller="客戶聯絡人" action="Index" roles="Admin,Customer" visible="true">
       <mvcSiteMapNode title="新增客戶聯絡人" controller="客戶聯絡人" action="Create" preservedRouteParameters="id" />
       <mvcSiteMapNode title="編輯客戶聯絡人" controller="客戶聯絡人" action="Edit" preservedRouteParameters="id" />
       <mvcSiteMapNode title="詳細客戶聯絡人" controller="客戶聯絡人" action="Details" preservedRouteParameters="id" />
       <mvcSiteMapNode title="刪除客戶聯絡人" controller="客戶聯絡人" action="Delete" preservedRouteParameters="id" />
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="客戶銀行資訊" controller="客戶銀行資訊" action="Index" roles="Admin,Customer">
+    <mvcSiteMapNode title="客戶銀行資訊" controller="客戶銀行資訊" action="Index" roles="Admin,Customer" visible="true">
       <mvcSiteMapNode title="新增客戶銀行資訊" controller="客戶銀行資訊" action="Create" preservedRouteParameters="id" />
       <mvcSiteMapNode title="編輯客戶銀行資訊" controller="客戶銀行資訊" action="Edit" preservedRouteParameters="id" />
       <mvcSiteMapNode title="詳細客戶銀行資訊" controller="客戶銀行資訊" action="Details" preservedRouteParameters="id" />
       <mvcSiteMapNode title="刪除客戶銀行資訊" controller="客戶銀行資訊" action="Delete" preservedRouteParameters="id" />
     </mvcSiteMapNode>
-    <mvcSiteMapNode title="AJAX 客戶信息" controller="客戶信息" action="Index"/>
+    <mvcSiteMapNode title="AJAX 客戶信息" controller="客戶信息" action="Index" visible="true"/>
 
 
     <mvcSiteMapNode title="會員登入" controller="Account" action="Login"/>
